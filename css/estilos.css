@@ -425,32 +425,6 @@ nav a.activo::after {
   letter-spacing: -4px;
 }
 
-/* Enlace "Saber más" que aparece al hover */
-.tarjeta-enlace {
-  display: inline-block;
-  margin-top: 16px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--color-dorado);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  text-decoration: none;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: all var(--transicion-suave);
-  position: relative;
-  z-index: 2;
-}
-
-.tarjeta-servicio:hover .tarjeta-enlace {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.tarjeta-enlace:hover {
-  color: var(--color-dorado-claro);
-}
-
 .icono-servicio {
   width: 72px;
   height: 72px;
