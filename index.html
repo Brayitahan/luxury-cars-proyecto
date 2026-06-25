@@ -19,6 +19,8 @@
 <!-- Favicon: icono en la pestaña del navegador -->
 <link rel="icon" type="image/png" sizes="48x48" href="img/favicon.png">
 
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self';">
+
 <!-- ============================================
      GOOGLE FONTS: Advent Pro
      Esta línea le dice al navegador: "antes de
@@ -67,8 +69,8 @@
 
     <div class="overlay-oscuro"></div>
 
-    <button class="flecha flecha-izq" onclick="imagenAnterior()">&#10094;</button>
-    <button class="flecha flecha-der" onclick="imagenSiguiente()">&#10095;</button>
+    <button class="flecha flecha-izq" id="btn-anterior">&#10094;</button>
+    <button class="flecha flecha-der" id="btn-siguiente">&#10095;</button>
 
     <div class="hero-indicadores" id="hero-indicadores"></div>
 

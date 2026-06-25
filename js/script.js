@@ -24,6 +24,9 @@ function imagenAnterior() {
   mostrarSlide(indiceActual);
 }
 
+document.getElementById("btn-anterior").addEventListener("click", imagenAnterior);
+document.getElementById("btn-siguiente").addEventListener("click", imagenSiguiente);
+
 var indicadores = document.getElementById("hero-indicadores");
 if (indicadores && slides.length) {
   for (var i = 0; i < slides.length; i++) {

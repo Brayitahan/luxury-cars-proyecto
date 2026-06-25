@@ -369,6 +369,30 @@ nav a.activo::after {
   opacity: 1;
 }
 
+/* ============================================
+   TARJETAS NO DISPONIBLES
+   ============================================ */
+.tarjeta-servicio.no-disponible {
+  opacity: 0.55;
+  filter: grayscale(0.6);
+  pointer-events: none;
+}
+
+.badge-no-disponible {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #b71c1c;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
 .icono-servicio {
   width: 72px;
   height: 72px;
