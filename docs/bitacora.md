@@ -114,6 +114,36 @@ Agregadas a `servicios.html`:
 
 ---
 
+---
+
+## Sesión 7 — Página de Inventario (galería antes/después)
+
+### Creación de `inventario.html`
+- Banner con título "Antes y Después — El resultado habla por sí solo"
+- Galería con 6 tarjetas de trabajos realizados:
+  - BMW Serie 3 (pintura completa)
+  - Mercedes-Benz Clase C (latonería y pintura)
+  - Audi A4 (pulido y detallado)
+  - Porsche 911 (pintura personalizada)
+  - Lexus IS (restauración de faros y pulido)
+  - Range Rover Sport (latonería completa)
+- Cada tarjeta tiene: nombre del auto, servicio realizado, comparación lado a lado (antes/después) con etiquetas diferenciadas por color, descripción del trabajo
+- Animaciones fade-in heredadas del resto del sitio
+- Imágenes placeholder de Unsplash (CSP actualizado para permitirlas)
+- Diseño responsive: en móvil las columnas se apilan
+
+### CSS agregado
+- Estilos para `.inventario`, `.grid-trabajos`, `.trabajo-card`, `.comparacion`, `.foto`, `.etiqueta`, `.trabajo-titulo`, `.trabajo-servicio`, `.trabajo-descripcion`
+- Hover con borde dorado superior y transformación (consistente con tarjetas de servicios)
+
+### Fix en script.js
+- Agregado `guard` en `mostrarSlide` para páginas que no tienen slides del carrusel
+
+### Commit
+- `2344d3b` — feat: crea página de inventario con galería antes/después
+
+---
+
 ## Estado actual del proyecto
 
 ### Páginas
@@ -121,7 +151,7 @@ Agregadas a `servicios.html`:
 |---|---|
 | `index.html` | ✅ Completo — carrusel hero (5 diapositivas, avance automático 5s) |
 | `servicios.html` | ✅ Completo — banner, 4 tarjetas, por qué elegirnos, proceso, ubicación, testimonios |
-| `inventario.html` | ❌ No existe — enlazado en el nav |
+| `inventario.html` | ✅ Completo — galería antes/después con 6 trabajos |
 | `contacto.html` | ❌ No existe — enlazado en el nav |
 
 ### Archivos clave
