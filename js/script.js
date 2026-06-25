@@ -24,8 +24,10 @@ function imagenAnterior() {
   mostrarSlide(indiceActual);
 }
 
-document.getElementById("btn-anterior").addEventListener("click", imagenAnterior);
-document.getElementById("btn-siguiente").addEventListener("click", imagenSiguiente);
+var btnAnt = document.getElementById("btn-anterior");
+var btnSig = document.getElementById("btn-siguiente");
+if (btnAnt) btnAnt.addEventListener("click", imagenAnterior);
+if (btnSig) btnSig.addEventListener("click", imagenSiguiente);
 
 var indicadores = document.getElementById("hero-indicadores");
 if (indicadores && slides.length) {
