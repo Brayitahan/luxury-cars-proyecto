@@ -160,7 +160,36 @@ Agregadas a `servicios.html`:
 
 ---
 
-## Sesión 9 — Heroes únicos para cada página
+## Sesión 10 — Home completo y footer rediseñado
+
+### Problema
+El home solo tenía el hero del carrusel y un footer minimalista con copyright. Se sentía vacío. El footer era igual en todas las páginas pero muy básico.
+
+### Secciones agregadas al home
+1. **Bienvenido** — párrafo de presentación del taller, texto centrado con divisor dorado
+2. **Servicios Rápidos** — grid de 4 tarjetas (Pintura, Latonería, Polichada, Cerámica) que linkean a servicios.html. Versión compacta de las tarjetas de servicio.
+3. **Números** — 3 estadísticas (10+ años, 500+ autos, 98% clientes satisfechos) con números grandes en dorado
+4. **CTA Final** — "¿Listo para darle una nueva vida a tu auto?" con botón "Ver Trabajos Realizados" link a inventario.html
+
+### Footer rediseñado
+- Grid de 3 columnas: logo+descripción, navegación, horarios
+- Divisor dorado con rombo antes del copyright
+- "Domingo: Cerrado" en rojo suave
+- Sin repetición de WhatsApp (solo link a contacto.html)
+- Responsive: en móvil todo se centra y apila
+
+### CSS agregado
+- `.bienvenido`, `.bienvenido-texto`
+- `.servicios-rapidos`, `.grid-servicios-rapidos`, `.servicio-rapido-card`, `.servicio-rapido-icono`
+- `.numeros`, `.numeros-contenido`, `.grid-numeros`, `.numero-item`, `.numero-valor`, `.numero-etiqueta`
+- `.cta-final`, `.cta-final-contenido`
+- Footer: `.footer-grid`, `.footer-col`, `.footer-logo-img`, `.footer-desc`, `.footer-nav`, `.footer-horario`, `.footer-bottom`, `.footer-divisor`
+- Todos con responsive
+
+### Commit
+- `673e1a3` — feat: agrega bienvenido, servicios rapidos, numeros, cta final y footer completo al home
+
+---
 
 ### Problema
 Las páginas de servicios, inventario y contacto compartían el mismo banner genérico (`.banner-seccion` con imagen de fondo + overlay + texto), dando una sensación repetitiva.
