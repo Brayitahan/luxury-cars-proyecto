@@ -2,6 +2,7 @@ const slides = document.querySelectorAll(".slide");
 let indiceActual = 0;
 
 function mostrarSlide(indice) {
+  if (!slides.length) return;
   slides.forEach(function (slide) {
     slide.classList.remove("activa");
   });
