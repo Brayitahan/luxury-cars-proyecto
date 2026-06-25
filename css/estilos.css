@@ -465,7 +465,8 @@ nav a.activo::after {
   width: 72px;
   height: 72px;
   object-fit: contain;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
+  display: block;
   transition: transform var(--transicion-suave);
 }
 
@@ -660,10 +661,9 @@ nav a.activo::after {
 }
 
 .grid-ubicacion {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
   gap: 50px;
-  align-items: start;
 }
 
 .info-ubicacion {
@@ -1350,7 +1350,8 @@ a.contacto-card:hover .contacto-accion {
   width: 60px;
   height: 60px;
   object-fit: contain;
-  margin-bottom: 16px;
+  margin: 0 auto 16px;
+  display: block;
   transition: transform var(--transicion-suave);
 }
 
@@ -1650,9 +1651,9 @@ footer {
   }
 
   .grid-ubicacion {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
   }
 
   .testimonios {
