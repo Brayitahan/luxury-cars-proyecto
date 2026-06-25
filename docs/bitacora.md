@@ -160,7 +160,28 @@ Agregadas a `servicios.html`:
 
 ---
 
-## Sesión 12 — Footer unificado y limpieza
+## Sesión 13 — Limpieza general de redundancias
+
+### Decisiones como dev (frontend, 20+ años exp)
+Se eliminaron todas las redundancias identificadas en el análisis:
+
+| # | Cambio | Detalle |
+|---|---|---|
+| 1 | ❌ Eliminada sección Bienvenido | Hero ya cumple ese rol |
+| 2 | ✂️ Servicios Rápidos simplificados | Solo icono + título, sin descripción (se distinguen de las tarjetas full en servicios.html) |
+| 3 | — CTA Final mantenido | Sirve como conversión después del scroll |
+| 4 | ❌ Horarios quitados de Ubicación | Ya están en el footer; Ubicación solo tiene dirección + mapa |
+| 5 | — Elegirnos + Cómo Trabajamos mantenidos | Una es beneficios, otra es proceso, se complementan |
+| 6 | ❌ CSS muerto eliminado | `.banner-seccion`, `.banner-contenido`, `.info-horarios`, `.fila-horario`, `.bienvenido` y sus responsive |
+| 7 | ♻️ Hover de tarjetas unificado | 6 clases comparten border/transition/position/::before mediante selectores agrupados, ~60 líneas → ~25 líneas |
+| 8 | ❌ Carpeta `data/` eliminada | 3 archivos obsoletos (`index.html`, `servicios.html`, `servicios.json`) |
+| 9 | — Testimonios mantenidos | Placeholders que dan estructura |
+
+### Push a GitHub
+- Backup subido antes de los cambios por petición del usuario
+- `7f0a76b` — commit de limpieza pusheado a `origin/develop`
+
+---
 
 ### Problemas
 - El footer nuevo solo estaba en index.html, las demás páginas tenían el footer viejo (solo copyright)
