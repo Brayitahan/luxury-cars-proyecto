@@ -1386,14 +1386,282 @@ a.contacto-card:hover .contacto-accion {
   }
 }
 
-footer {
+/* ============================================
+   BIENVENIDO
+   ============================================ */
+.bienvenido {
+  padding: 100px 60px;
+  max-width: 900px;
+  margin: 0 auto;
   text-align: center;
-  padding: 32px 24px;
-  background-color: var(--color-fondo-claro);
+}
+
+.bienvenido-texto {
+  font-size: 17px;
+  font-weight: 300;
   color: var(--color-texto-secundario);
-  font-size: 14px;
+  line-height: 1.9;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   SERVICIOS RÁPIDOS — HOME
+   ============================================ */
+.servicios-rapidos {
+  padding: 100px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-servicios-rapidos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.servicio-rapido-card {
+  display: block;
+  background-color: var(--color-fondo-claro);
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 36px 20px 28px;
+  text-align: center;
+  text-decoration: none;
+  transition: all var(--transicion-suave);
+  position: relative;
+  overflow: hidden;
+}
+
+.servicio-rapido-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
+  opacity: 0;
+  transition: opacity var(--transicion-suave);
+}
+
+.servicio-rapido-card:hover {
+  border-color: var(--color-dorado);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), var(--sombra-dorada);
+}
+
+.servicio-rapido-card:hover::before {
+  opacity: 1;
+}
+
+.servicio-rapido-icono {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  transition: transform var(--transicion-suave);
+}
+
+.servicio-rapido-card:hover .servicio-rapido-icono {
+  transform: scale(1.1);
+}
+
+.servicio-rapido-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-dorado);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.servicio-rapido-card p {
+  font-size: 13px;
+  color: var(--color-texto-secundario);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ============================================
+   NÚMEROS
+   ============================================ */
+.numeros {
+  padding: 100px 60px;
+  background-color: var(--color-fondo-claro);
+}
+
+.numeros-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-numeros {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.numero-item {
+  padding: 20px;
+}
+
+.numero-valor {
+  display: block;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--color-dorado);
+  line-height: 1;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.numero-etiqueta {
+  display: block;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   CTA FINAL
+   ============================================ */
+.cta-final {
+  padding: 100px 60px;
+  text-align: center;
+}
+
+.cta-final-contenido {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-final-contenido h2 {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.cta-final-contenido p {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  margin-bottom: 36px;
+  letter-spacing: 1px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background-color: var(--color-fondo-claro);
   border-top: 1px solid #2a2a2a;
+}
+
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 60px 0;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 50px;
+}
+
+.footer-col h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-texto);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.footer-logo-img {
+  height: 42px;
+  width: auto;
+  margin-bottom: 16px;
+}
+
+.footer-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  line-height: 1.7;
+}
+
+.footer-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav a {
+  color: var(--color-texto-secundario);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 300;
+  transition: color var(--transicion-suave);
+}
+
+.footer-nav a:hover {
+  color: var(--color-dorado);
+}
+
+.footer-horario p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  margin-bottom: 8px;
   letter-spacing: 0.5px;
+}
+
+.footer-horario-domingo {
+  color: #ef9a9a;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 60px;
+  text-align: center;
+}
+
+.footer-divisor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-divisor .linea {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
+}
+
+.footer-divisor .rombo {
+  width: 8px;
+  height: 8px;
+  background: var(--color-dorado);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.footer-bottom p {
+  font-size: 13px;
+  color: var(--color-texto-secundario);
+  letter-spacing: 0.5px;
+  font-weight: 300;
 }
 
 @media (max-width: 768px) {
@@ -1519,5 +1787,81 @@ footer {
   .grid-testimonios {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .bienvenido {
+    padding: 60px 20px;
+  }
+
+  .bienvenido-texto {
+    font-size: 15px;
+  }
+
+  .servicios-rapidos {
+    padding: 60px 20px;
+  }
+
+  .grid-servicios-rapidos {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .servicio-rapido-card {
+    padding: 24px 16px 20px;
+  }
+
+  .servicio-rapido-icono {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+  }
+
+  .servicio-rapido-card h3 {
+    font-size: 15px;
+  }
+
+  .servicio-rapido-card p {
+    font-size: 12px;
+  }
+
+  .numeros {
+    padding: 60px 20px;
+  }
+
+  .grid-numeros {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .numero-valor {
+    font-size: 42px;
+  }
+
+  .cta-final {
+    padding: 60px 20px;
+  }
+
+  .cta-final-contenido h2 {
+    font-size: 26px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 40px 24px 0;
+    text-align: center;
+  }
+
+  .footer-logo-img {
+    margin: 0 auto 16px;
+    display: block;
+  }
+
+  .footer-nav ul {
+    align-items: center;
+  }
+
+  .footer-bottom {
+    padding: 24px 24px;
   }
 }
