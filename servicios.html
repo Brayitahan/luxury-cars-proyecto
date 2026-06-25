@@ -5,19 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luxury Cars | Servicios</title>
 
-<!-- SEO: descripción y palabras clave para buscadores -->
 <meta name="description" content="Somos tu mejor opción en pintura automotriz, latonería, polichada y recubrimiento cerámico. Calidad de lujo en cada detalle.">
 <meta name="keywords" content="taller automotriz, pintura de carros, latonería, polichada, cerámica automotriz, lujo">
 
-<!-- Open Graph: previsualización al compartir en redes -->
 <meta property="og:title" content="Luxury Cars | Servicios">
 <meta property="og:description" content="Somos tu mejor opción en pintura y servicios automotrices de lujo.">
 <meta property="og:image" content="img/hero/taller-1.jpg">
 <meta property="og:url" content="https://tudominio.com/servicios.html">
 <meta property="og:type" content="website">
 
-<!-- Favicon: icono en la pestaña del navegador -->
 <link rel="icon" type="image/png" sizes="48x48" href="img/favicon.png">
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self';">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +26,6 @@
 </head>
 <body>
 
-  <!-- Header idéntico al de index.html, pero ahora
-       "Servicios" tiene la clase "activo" -->
   <header>
     <div class="logo">
       <img src="img/logo.png" alt="Logo Luxury Cars" class="logo-img">
@@ -43,37 +40,61 @@
     </nav>
   </header>
 
-  <!-- ============================================
-       SECCIÓN DE SERVICIOS
-       Por ahora ESCRIBIMOS A MANO cada tarjeta.
-       Si quisiéramos agregar un 5to servicio,
-       tendríamos que copiar y pegar un bloque
-       completo de <div class="tarjeta-servicio">.
-       ============================================ -->
+  <section class="hero-servicios">
+    <div class="hero-servicios-contenido fade-in">
+      <p class="hero-servicios-badge">Especialistas en</p>
+      <h2>Cuidado <span>Automotriz</span></h2>
+      <div class="hero-servicios-tags">
+        <span class="hero-servicios-tag">Pintura</span>
+        <span class="hero-servicios-tag">Latonería</span>
+        <span class="hero-servicios-tag">Polichada</span>
+        <span class="hero-servicios-tag">Cerámica</span>
+      </div>
+      <p class="hero-servicios-sub">Más de 10 años devolviéndole el brillo a tu auto</p>
+    </div>
+  </section>
+
   <section class="servicios">
-    <h2 class="titulo-seccion">Nuestros Servicios</h2>
+    <p class="subtitulo-seccion fade-in">Especialidades</p>
+    <h2 class="titulo-seccion fade-in">Nuestros Servicios</h2>
+
+    <div class="divisor-dorado fade-in">
+      <span class="linea"></span>
+      <span class="rombo"></span>
+      <span class="linea"></span>
+    </div>
+
+    <div class="intro-servicios fade-in">
+      <p>Trabajamos cada vehículo como si fuera nuestro. Usamos productos de primera calidad y técnicas especializadas para que el resultado sea impecable, de principio a fin.</p>
+    </div>
 
     <div class="grid-servicios">
 
-      <div class="tarjeta-servicio">
+      <div class="tarjeta-servicio fade-in fade-in-d1">
+        <span class="tarjeta-numero">01</span>
         <img src="img/iconos/pintura.png" alt="Icono de pintura automotriz" class="icono-servicio">
         <h3>Pintura Automotriz</h3>
         <p>Acabados de precisión con pintura de alta calidad y protección UV.</p>
       </div>
 
-      <div class="tarjeta-servicio">
+      <div class="tarjeta-servicio fade-in fade-in-d2">
+        <span class="tarjeta-numero">02</span>
         <img src="img/iconos/latoneria.png" alt="Icono de latonería" class="icono-servicio">
         <h3>Latonería</h3>
         <p>Reparaciones de carrocería, restauración de paneles y abolladuras.</p>
       </div>
 
-      <div class="tarjeta-servicio">
+      <div class="tarjeta-servicio fade-in fade-in-d3 no-disponible">
+        <span class="badge-no-disponible">No disponible</span>
+        <span class="tarjeta-numero">03</span>
         <img src="img/iconos/polichada.png" alt="Icono de polichada" class="icono-servicio">
         <h3>Polichada</h3>
         <p>Pulido profesional para eliminar imperfecciones y lograr brillo espejo.</p>
       </div>
 
-      <div class="tarjeta-servicio">
+      <div class="tarjeta-servicio fade-in fade-in-d4 no-disponible">
+        <span class="badge-no-disponible">No disponible</span>
+        <span class="tarjeta-numero">04</span>
         <img src="img/iconos/ceramica.png" alt="Icono de recubrimiento cerámico" class="icono-servicio">
         <h3>Cerámica</h3>
         <p>Revestimiento cerámico premium para protección duradera contra arañazos y contaminantes.</p>
@@ -82,9 +103,161 @@
     </div>
   </section>
 
+  <section class="elegirnos">
+    <div class="elegirnos-contenido">
+      <p class="subtitulo-seccion fade-in">¿Por qué nosotros?</p>
+      <h2 class="titulo-seccion fade-in">Por qué Elegirnos</h2>
+
+      <div class="divisor-dorado fade-in">
+        <span class="linea"></span>
+        <span class="rombo"></span>
+        <span class="linea"></span>
+      </div>
+
+      <div class="grid-elegirnos">
+        <div class="item-elegirnos fade-in fade-in-d1">
+          <div class="icono-circular">&#9733;</div>
+          <h3>Experiencia</h3>
+          <p>Más de 10 años en el mercado automotriz. Sabemos lo que tu auto necesita y cómo dejarlo como nuevo.</p>
+        </div>
+
+        <div class="item-elegirnos fade-in fade-in-d2">
+          <div class="icono-circular">&#10003;</div>
+          <h3>Garantía</h3>
+          <p>Respaldamos cada trabajo con garantía escrita. Si no estás satisfecho, lo arreglamos sin costo.</p>
+        </div>
+
+        <div class="item-elegirnos fade-in fade-in-d3">
+          <div class="icono-circular">&#9829;</div>
+          <h3>Atención Personalizada</h3>
+          <p>Te explicamos cada paso del proceso y te asesoramos para elegir el servicio ideal para tu vehículo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proceso">
+    <p class="subtitulo-seccion fade-in">Metodología</p>
+    <h2 class="titulo-seccion fade-in">Cómo Trabajamos</h2>
+
+    <div class="divisor-dorado fade-in">
+      <span class="linea"></span>
+      <span class="rombo"></span>
+      <span class="linea"></span>
+    </div>
+
+    <div class="grid-proceso">
+      <div class="paso fade-in fade-in-d1">
+        <div class="paso-numero">1</div>
+        <h4>Diagnóstico</h4>
+        <p>Evaluamos el estado real de tu vehículo y te cotizamos sin compromiso.</p>
+      </div>
+
+      <div class="paso fade-in fade-in-d2">
+        <div class="paso-numero">2</div>
+        <h4>Reparación</h4>
+        <p>Ejecutamos el trabajo con precisión, usando materiales de primera calidad.</p>
+      </div>
+
+      <div class="paso fade-in fade-in-d3">
+        <div class="paso-numero">3</div>
+        <h4>Control de Calidad</h4>
+        <p>Revisamos cada detalle para asegurarnos de que el resultado sea perfecto.</p>
+      </div>
+
+      <div class="paso fade-in fade-in-d4">
+        <div class="paso-numero">4</div>
+        <h4>Entrega</h4>
+        <p>Te devolvemos tu auto impecable, con la satisfacción de un trabajo bien hecho.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ubicacion">
+    <p class="subtitulo-seccion fade-in">Visítanos</p>
+    <h2 class="titulo-seccion fade-in">Ubicación y Horarios</h2>
+
+    <div class="divisor-dorado fade-in">
+      <span class="linea"></span>
+      <span class="rombo"></span>
+      <span class="linea"></span>
+    </div>
+
+    <div class="grid-ubicacion">
+      <div class="info-ubicacion fade-in fade-in-d1">
+        <img src="img/iconos/ubicacion.png" alt="Ubicación" class="icono-ubicacion">
+        <h3>Dirección</h3>
+        <p>Dirección exacta al hacer clic en el mapa</p>
+        <a href="https://maps.app.goo.gl/kz5e8yXtMKkfyWht7" class="btn-mapa" target="_blank">Ver en Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonios">
+    <p class="subtitulo-seccion fade-in">Clientes Felices</p>
+    <h2 class="titulo-seccion fade-in">Testimonios</h2>
+
+    <div class="divisor-dorado fade-in">
+      <span class="linea"></span>
+      <span class="rombo"></span>
+      <span class="linea"></span>
+    </div>
+
+    <div class="grid-testimonios">
+      <div class="testimonio fade-in fade-in-d1">
+        <p class="testimonio-texto">"Dejaron mi carro impecable. La pintura quedó como nueva, parece que acabara de salir del concesionario."</p>
+        <p class="testimonio-autor">— Carlos M.</p>
+      </div>
+
+      <div class="testimonio fade-in fade-in-d2">
+        <p class="testimonio-texto">"Excelente servicio y atención. Me explicaron todo el proceso y cumplieron con el tiempo prometido."</p>
+        <p class="testimonio-autor">— Andrea L.</p>
+      </div>
+
+      <div class="testimonio fade-in fade-in-d3">
+        <p class="testimonio-texto">"La polichada que le hicieron a mi auto es increíble. Quedó con un brillo espejo que dura hasta hoy."</p>
+        <p class="testimonio-autor">— Felipe R.</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/script.js"></script>
+
   <footer>
-    <p>&copy; 2026 Luxury Cars. Todos los derechos reservados.</p>
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <img src="img/logo.png" alt="Luxury Cars" class="footer-logo-img">
+        <p class="footer-desc">Taller automotriz especializado en pintura, latonería y acabados de lujo. Calidad que se ve y se siente.</p>
+      </div>
+
+      <div class="footer-col footer-nav">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="inventario.html">Inventario</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-horario">
+        <h4>Horarios</h4>
+        <p>Lun — Vie: 8:00 AM — 6:00 PM</p>
+        <p>Sáb: 8:00 AM — 2:00 PM</p>
+        <p class="footer-horario-domingo">Dom: Cerrado</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-divisor">
+        <span class="linea"></span>
+        <span class="rombo"></span>
+        <span class="linea"></span>
+      </div>
+      <p>&copy; 2026 Luxury Cars. Todos los derechos reservados.</p>
+    </div>
   </footer>
 
+  <script src="js/script.js"></script>
 </body>
 </html>

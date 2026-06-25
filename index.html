@@ -19,6 +19,8 @@
 <!-- Favicon: icono en la pestaña del navegador -->
 <link rel="icon" type="image/png" sizes="48x48" href="img/favicon.png">
 
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self';">
+
 <!-- ============================================
      GOOGLE FONTS: Advent Pro
      Esta línea le dice al navegador: "antes de
@@ -55,13 +57,6 @@
     </nav>
   </header>
 
-  <!-- ============================================
-       SECCIÓN HERO con CARRUSEL de imágenes
-       - Cada <div class="slide"> es una foto candidata
-       - Solo la que tiene la clase "activa" se ve
-       - Las flechas llaman a funciones de JavaScript
-         que están definidas en js/script.js
-       ============================================ -->
   <section class="hero">
 
     <div class="carrusel">
@@ -72,35 +67,139 @@
       <div class="slide" style="background-image: url('img/hero/taller-5.jpg');"></div>
     </div>
 
-    <!-- Esta capa oscura va ENCIMA de las fotos, para que el texto se lea bien -->
     <div class="overlay-oscuro"></div>
 
-    <!-- Flechas de navegación manual.
-         onclick="..." ejecuta una función de JavaScript
-         apenas el usuario hace click -->
-    <button class="flecha flecha-izq" onclick="imagenAnterior()">&#10094;</button>
-    <button class="flecha flecha-der" onclick="imagenSiguiente()">&#10095;</button>
+    <button class="flecha flecha-izq" id="btn-anterior">&#10094;</button>
+    <button class="flecha flecha-der" id="btn-siguiente">&#10095;</button>
 
-    <!-- El contenido de texto va POR ENCIMA de todo (z-index) -->
+    <div class="hero-indicadores" id="hero-indicadores"></div>
+
     <div class="hero-contenido">
-      <h1>Luxury Cars: <span>Excelencia en Cada Detalle</span></h1>
-      <p>Your Passion, Our Excellence</p>
+      <h1>Lujo Automotriz <span>Hecho a Mano</span></h1>
+      <p>Pintura · Latonería · Cerámica · Polichada</p>
       <div class="hero-botones">
-        <a href="servicios.html" class="btn btn-primario">Explora Nuestros Servicios</a>
-        <a href="inventario.html" class="btn btn-secundario">Conoce Nuestro Inventario</a>
+        <a href="servicios.html" class="btn btn-primario">Ver Servicios</a>
+        <a href="inventario.html" class="btn btn-secundario">Inventario</a>
       </div>
     </div>
 
   </section>
 
-  <script src="js/script.js"></script>
+  <!-- ============================================
+       SERVICIOS RÁPIDOS
+       ============================================ -->
+  <section class="servicios-rapidos">
+    <p class="subtitulo-seccion fade-in">Nuestros Servicios</p>
+    <h2 class="titulo-seccion fade-in">Qué Ofrecemos</h2>
+
+    <div class="divisor-dorado fade-in">
+      <span class="linea"></span>
+      <span class="rombo"></span>
+      <span class="linea"></span>
+    </div>
+
+    <div class="grid-servicios-rapidos">
+
+      <a href="servicios.html" class="servicio-rapido-card fade-in fade-in-d1">
+        <img src="img/iconos/pintura.png" alt="Pintura automotriz" class="servicio-rapido-icono">
+        <h3>Pintura Automotriz</h3>
+      </a>
+
+      <a href="servicios.html" class="servicio-rapido-card fade-in fade-in-d2">
+        <img src="img/iconos/latoneria.png" alt="Latonería" class="servicio-rapido-icono">
+        <h3>Latonería</h3>
+      </a>
+
+      <a href="servicios.html" class="servicio-rapido-card fade-in fade-in-d3">
+        <img src="img/iconos/polichada.png" alt="Polichada" class="servicio-rapido-icono">
+        <h3>Polichada</h3>
+      </a>
+
+      <a href="servicios.html" class="servicio-rapido-card fade-in fade-in-d4">
+        <img src="img/iconos/ceramica.png" alt="Recubrimiento cerámico" class="servicio-rapido-icono">
+        <h3>Cerámica</h3>
+      </a>
+
+    </div>
+  </section>
 
   <!-- ============================================
-       FOOTER simple, se repite en todas las páginas
+       NÚMEROS — ESTADÍSTICAS
        ============================================ -->
+  <section class="numeros">
+    <div class="numeros-contenido">
+      <p class="subtitulo-seccion fade-in">Trayectoria</p>
+      <h2 class="titulo-seccion fade-in">En Cifras</h2>
+
+      <div class="divisor-dorado fade-in">
+        <span class="linea"></span>
+        <span class="rombo"></span>
+        <span class="linea"></span>
+      </div>
+
+      <div class="grid-numeros">
+        <div class="numero-item fade-in fade-in-d1">
+          <span class="numero-valor">10+</span>
+          <span class="numero-etiqueta">Años de Experiencia</span>
+        </div>
+        <div class="numero-item fade-in fade-in-d2">
+          <span class="numero-valor">500+</span>
+          <span class="numero-etiqueta">Autos Restaurados</span>
+        </div>
+        <div class="numero-item fade-in fade-in-d3">
+          <span class="numero-valor">98%</span>
+          <span class="numero-etiqueta">Clientes Satisfechos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CTA FINAL
+       ============================================ -->
+  <section class="cta-final">
+    <div class="cta-final-contenido fade-in">
+      <h2>¿Listo para darle una nueva vida a tu auto?</h2>
+      <p>Conoce los trabajos que hemos realizado y transforma tu vehículo con nosotros.</p>
+      <a href="inventario.html" class="btn btn-primario">Ver Trabajos Realizados</a>
+    </div>
+  </section>
+
   <footer>
-    <p>&copy; 2026 Luxury Cars. Todos los derechos reservados.</p>
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <img src="img/logo.png" alt="Luxury Cars" class="footer-logo-img">
+        <p class="footer-desc">Taller automotriz especializado en pintura, latonería y acabados de lujo. Calidad que se ve y se siente.</p>
+      </div>
+
+      <div class="footer-col footer-nav">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="inventario.html">Inventario</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-horario">
+        <h4>Horarios</h4>
+        <p>Lun — Vie: 8:00 AM — 6:00 PM</p>
+        <p>Sáb: 8:00 AM — 2:00 PM</p>
+        <p class="footer-horario-domingo">Dom: Cerrado</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-divisor">
+        <span class="linea"></span>
+        <span class="rombo"></span>
+        <span class="linea"></span>
+      </div>
+      <p>&copy; 2026 Luxury Cars. Todos los derechos reservados.</p>
+    </div>
   </footer>
 
+  <script src="js/script.js"></script>
 </body>
 </html>
