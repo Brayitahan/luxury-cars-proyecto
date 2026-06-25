@@ -1,56 +1,59 @@
-/* ============================================
-   CARRUSEL DEL HERO (página Inicio)
-   ============================================ */
-
-// 1) Buscamos en el HTML todos los elementos que tengan
-//    la clase "slide" y los guardamos en una lista.
-//    document.querySelectorAll() devuelve TODOS los que coincidan.
 const slides = document.querySelectorAll(".slide");
-
-// 2) Esta variable recuerda CUÁL imagen está activa ahora.
-//    Empieza en 0 porque en programación las listas se cuentan
-//    desde 0, no desde 1. slides[0] = la primera imagen.
 let indiceActual = 0;
 
-/* ----------------------------------------------
-   mostrarSlide(indice)
-   Quita la clase "activa" de TODAS las imágenes,
-   y se la pone solo a la que corresponde al índice
-   que recibimos.
-   ---------------------------------------------- */
 function mostrarSlide(indice) {
   slides.forEach(function (slide) {
     slide.classList.remove("activa");
   });
   slides[indice].classList.add("activa");
+
+  const dots = document.querySelectorAll("#hero-indicadores span");
+  if (dots.length) {
+    dots.forEach(function (d) { d.classList.remove("activo"); });
+    dots[indice].classList.add("activo");
+  }
 }
 
-/* ----------------------------------------------
-   imagenSiguiente()
-   Conectada al botón de la flecha derecha (>)
-   ---------------------------------------------- */
 function imagenSiguiente() {
-  // Si estamos en la última imagen, el "+1" la lleva
-  // de vuelta a la primera, usando el operador módulo (%).
-  // Ejemplo con 5 imágenes: (4 + 1) % 5 = 0 (vuelve al inicio)
   indiceActual = (indiceActual + 1) % slides.length;
   mostrarSlide(indiceActual);
 }
 
-/* ----------------------------------------------
-   imagenAnterior()
-   Conectada al botón de la flecha izquierda (<)
-   ---------------------------------------------- */
 function imagenAnterior() {
-  // Restamos 1, pero si quedamos en negativo,
-  // sumamos slides.length para "envolver" hacia el final.
   indiceActual = (indiceActual - 1 + slides.length) % slides.length;
   mostrarSlide(indiceActual);
 }
 
-/* ----------------------------------------------
-   Avance automático cada 5 segundos (5000 ms).
-   setInterval ejecuta la función que le pasamos
-   una y otra vez, cada X milisegundos, para siempre.
-   ---------------------------------------------- */
-setInterval(imagenSiguiente, 5000);
+var indicadores = document.getElementById("hero-indicadores");
+if (indicadores && slides.length) {
+  for (var i = 0; i < slides.length; i++) {
+    var dot = document.createElement("span");
+    dot.setAttribute("data-indice", i);
+    dot.addEventListener("click", function () {
+      var idx = parseInt(this.getAttribute("data-indice"));
+      indiceActual = idx;
+      mostrarSlide(indiceActual);
+    });
+    indicadores.appendChild(dot);
+  }
+  indicadores.children[0].classList.add("activo");
+}
+
+if (slides.length > 1) {
+  setInterval(imagenSiguiente, 5000);
+}
+
+var elementosFade = document.querySelectorAll(".fade-in");
+if (elementosFade.length) {
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.15 });
+
+  elementosFade.forEach(function (el) {
+    observer.observe(el);
+  });
+}

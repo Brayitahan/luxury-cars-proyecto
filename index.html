@@ -55,13 +55,6 @@
     </nav>
   </header>
 
-  <!-- ============================================
-       SECCIÓN HERO con CARRUSEL de imágenes
-       - Cada <div class="slide"> es una foto candidata
-       - Solo la que tiene la clase "activa" se ve
-       - Las flechas llaman a funciones de JavaScript
-         que están definidas en js/script.js
-       ============================================ -->
   <section class="hero">
 
     <div class="carrusel">
@@ -72,22 +65,19 @@
       <div class="slide" style="background-image: url('img/hero/taller-5.jpg');"></div>
     </div>
 
-    <!-- Esta capa oscura va ENCIMA de las fotos, para que el texto se lea bien -->
     <div class="overlay-oscuro"></div>
 
-    <!-- Flechas de navegación manual.
-         onclick="..." ejecuta una función de JavaScript
-         apenas el usuario hace click -->
     <button class="flecha flecha-izq" onclick="imagenAnterior()">&#10094;</button>
     <button class="flecha flecha-der" onclick="imagenSiguiente()">&#10095;</button>
 
-    <!-- El contenido de texto va POR ENCIMA de todo (z-index) -->
+    <div class="hero-indicadores" id="hero-indicadores"></div>
+
     <div class="hero-contenido">
-      <h1>Luxury Cars: <span>Excelencia en Cada Detalle</span></h1>
-      <p>Your Passion, Our Excellence</p>
+      <h1>Lujo Automotriz <span>Hecho a Mano</span></h1>
+      <p>Pintura · Latonería · Cerámica · Polichada</p>
       <div class="hero-botones">
-        <a href="servicios.html" class="btn btn-primario">Explora Nuestros Servicios</a>
-        <a href="inventario.html" class="btn btn-secundario">Conoce Nuestro Inventario</a>
+        <a href="servicios.html" class="btn btn-primario">Ver Servicios</a>
+        <a href="inventario.html" class="btn btn-secundario">Inventario</a>
       </div>
     </div>
 
@@ -95,9 +85,6 @@
 
   <script src="js/script.js"></script>
 
-  <!-- ============================================
-       FOOTER simple, se repite en todas las páginas
-       ============================================ -->
   <footer>
     <p>&copy; 2026 Luxury Cars. Todos los derechos reservados.</p>
   </footer>

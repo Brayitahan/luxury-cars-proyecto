@@ -1,25 +1,25 @@
-/* ============================================
-   RESET BÁSICO
-   ============================================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ============================================
-   VARIABLES CSS
-   Un solo lugar para cambiar colores y fuentes
-   en todo el sitio.
-   ============================================ */
 :root {
   --color-fondo: #0d0d0d;
   --color-fondo-claro: #1a1a1a;
   --color-dorado: #d4af37;
   --color-dorado-claro: #f0d878;
+  --color-dorado-oscuro: #b8962e;
   --color-texto: #f5f5f5;
   --color-texto-secundario: #b0b0b0;
   --fuente-principal: 'Advent Pro', sans-serif;
+
+  --sombra-dorada: 0 0 20px rgba(212, 175, 55, 0.15);
+  --transicion-suave: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -27,11 +27,9 @@ body {
   background-color: var(--color-fondo);
   color: var(--color-texto);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ============================================
-   HEADER / NAVEGACIÓN
-   ============================================ */
 header {
   position: sticky;
   top: 0;
@@ -42,6 +40,7 @@ header {
   padding: 18px 60px;
   background-color: rgba(13, 13, 13, 0.95);
   border-bottom: 1px solid #2a2a2a;
+  backdrop-filter: blur(8px);
 }
 
 .logo {
@@ -51,7 +50,12 @@ header {
 
 .logo-img {
   height: 50px;
-  width: auto; /* el ancho se ajusta solo, respetando la proporción original */
+  width: auto;
+  transition: opacity var(--transicion-suave);
+}
+
+.logo-img:hover {
+  opacity: 0.85;
 }
 
 nav ul {
@@ -65,42 +69,50 @@ nav a {
   text-decoration: none;
   font-size: 17px;
   font-weight: 500;
-  transition: color 0.3s ease;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding-bottom: 6px;
+  transition: color var(--transicion-suave);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-dorado);
+  transition: width var(--transicion-suave);
 }
 
 nav a:hover {
   color: var(--color-dorado);
 }
 
-/* .activo marca el link de la página en la que estamos parados */
+nav a:hover::after {
+  width: 100%;
+}
+
 nav a.activo {
   color: var(--color-dorado);
-  border-bottom: 2px solid var(--color-dorado);
-  padding-bottom: 4px;
 }
 
-/* ============================================
-   SECCIÓN HERO (contenedor general)
-   position: relative es CLAVE: permite que los
-   elementos hijos (slides, overlay, flechas)
-   se posicionen "absolute" tomando este bloque
-   como referencia, no toda la página.
-   ============================================ */
+nav a.activo::after {
+  width: 100%;
+}
+
 .hero {
   position: relative;
-  min-height: 85vh;
-  overflow: hidden; /* nada se desborda fuera de esta caja */
+  min-height: 90vh;
+  overflow: hidden;
 }
 
-/* Contenedor de las imágenes del carrusel */
 .carrusel {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
 }
 
-/* Cada foto candidata: ocupa TODO el espacio del hero,
-   pero está invisible (opacity: 0) hasta que tenga
-   la clase .activa */
 .slide {
   position: absolute;
   top: 0; left: 0;
@@ -109,26 +121,25 @@ nav a.activo {
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 1.2s ease-in-out; /* el fundido suave */
+  transition: opacity 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(1.05);
 }
 
 .slide.activa {
   opacity: 1;
+  transform: scale(1);
 }
 
-/* Capa negra semi-transparente encima de las fotos,
-   para que el texto blanco/dorado se siga leyendo */
 .overlay-oscuro {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.7) 100%);
 }
 
-/* El texto y botones, por encima de todo gracias a z-index */
 .hero-contenido {
   position: relative;
   z-index: 10;
-  min-height: 85vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -138,22 +149,32 @@ nav a.activo {
 }
 
 .hero-contenido h1 {
-  font-size: 52px;
-  font-weight: 600;
-  margin-bottom: 16px;
+  font-size: 56px;
+  font-weight: 700;
+  margin-bottom: 12px;
   color: var(--color-texto);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1.1;
 }
 
 .hero-contenido h1 span {
   color: var(--color-dorado);
+  display: block;
+  font-weight: 300;
+  font-size: 32px;
+  letter-spacing: 6px;
+  text-transform: none;
+  margin-top: 8px;
 }
 
 .hero-contenido p {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 300;
-  font-style: italic;
   color: var(--color-texto-secundario);
-  margin-bottom: 36px;
+  margin-bottom: 40px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
 }
 
 .hero-botones {
@@ -161,43 +182,87 @@ nav a.activo {
   gap: 20px;
 }
 
-/* Flechas de navegación manual */
+.hero-indicadores {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 10px;
+}
+
+.hero-indicadores span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transition: all var(--transicion-suave);
+  cursor: pointer;
+}
+
+.hero-indicadores span.activo {
+  background: var(--color-dorado);
+  box-shadow: var(--sombra-dorada);
+  width: 28px;
+  border-radius: 5px;
+}
+
 .flecha {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid var(--color-dorado);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   color: var(--color-dorado);
-  font-size: 22px;
-  width: 48px;
-  height: 48px;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all var(--transicion-suave);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
 }
 
 .flecha:hover {
   background: var(--color-dorado);
   color: #000;
+  border-color: var(--color-dorado);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .flecha-izq { left: 24px; }
 .flecha-der { right: 24px; }
 
 .btn {
-  padding: 14px 28px;
+  padding: 16px 34px;
   border-radius: 4px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 16px;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all var(--transicion-suave);
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-primario {
   background-color: var(--color-dorado);
   color: #000;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-primario:hover {
+  background-color: var(--color-dorado-claro);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
 }
 
 .btn-secundario {
@@ -206,32 +271,65 @@ nav a.activo {
   border: 1px solid var(--color-dorado);
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
+.btn-secundario:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+  border-color: var(--color-dorado-claro);
+  transform: translateY(-3px);
 }
 
-/* ============================================
-   SECCIÓN SERVICIOS
-   ============================================ */
+.btn:active {
+  transform: translateY(0);
+}
+
+.divisor-dorado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 auto 50px;
+  max-width: 300px;
+}
+
+.divisor-dorado .linea {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
+}
+
+.divisor-dorado .rombo {
+  width: 10px;
+  height: 10px;
+  background: var(--color-dorado);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
 .servicios {
-  padding: 80px 60px;
+  padding: 100px 60px;
   max-width: 1200px;
-  margin: 0 auto; /* centra el bloque horizontalmente */
+  margin: 0 auto;
 }
 
 .titulo-seccion {
   text-align: center;
-  font-size: 36px;
-  font-weight: 600;
-  margin-bottom: 50px;
-  color: var(--color-dorado);
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--color-texto);
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-/* CSS Grid: organiza las tarjetas en una grilla
-   que se acomoda sola según el tamaño de pantalla.
-   minmax(260px, 1fr) = cada columna mide al menos
-   260px, pero crece para llenar el espacio. */
+.subtitulo-seccion {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  margin-bottom: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
 .grid-servicios {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -241,22 +339,46 @@ nav a.activo {
 .tarjeta-servicio {
   background-color: var(--color-fondo-claro);
   border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  padding: 36px 28px;
+  border-radius: 12px;
+  padding: 44px 28px 36px;
   text-align: center;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition: all var(--transicion-suave);
+  position: relative;
+  overflow: hidden;
+}
+
+.tarjeta-servicio::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
+  opacity: 0;
+  transition: opacity var(--transicion-suave);
 }
 
 .tarjeta-servicio:hover {
   border-color: var(--color-dorado);
-  transform: translateY(-6px); /* la tarjeta "flota" un poco al pasar el mouse */
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), var(--sombra-dorada);
+}
+
+.tarjeta-servicio:hover::before {
+  opacity: 1;
 }
 
 .icono-servicio {
-  width: 80px;
-  height: 80px;
-  object-fit: contain; /* mantiene la proporción de la imagen sin deformarla */
-  margin-bottom: 18px;
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  transition: transform var(--transicion-suave);
+}
+
+.tarjeta-servicio:hover .icono-servicio {
+  transform: scale(1.1);
 }
 
 .tarjeta-servicio h3 {
@@ -264,31 +386,43 @@ nav a.activo {
   font-weight: 600;
   color: var(--color-dorado);
   margin-bottom: 12px;
+  letter-spacing: 1px;
 }
 
 .tarjeta-servicio p {
   font-size: 15px;
   color: var(--color-texto-secundario);
   font-weight: 300;
+  line-height: 1.7;
 }
 
-/* ============================================
-   FOOTER
-   ============================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-d1 { transition-delay: 0.1s; }
+.fade-in-d2 { transition-delay: 0.2s; }
+.fade-in-d3 { transition-delay: 0.3s; }
+.fade-in-d4 { transition-delay: 0.4s; }
+
 footer {
   text-align: center;
-  padding: 24px;
+  padding: 32px 24px;
   background-color: var(--color-fondo-claro);
   color: var(--color-texto-secundario);
   font-size: 14px;
   border-top: 1px solid #2a2a2a;
+  letter-spacing: 0.5px;
 }
 
-/* ============================================
-   RESPONSIVE — CELULAR (pantallas ≤ 768px)
-   ============================================ */
 @media (max-width: 768px) {
-
   header {
     padding: 14px 20px;
     flex-wrap: wrap;
@@ -309,11 +443,18 @@ footer {
 
   .hero-contenido h1 {
     font-size: 32px;
+    letter-spacing: 1px;
+  }
+
+  .hero-contenido h1 span {
+    font-size: 20px;
+    letter-spacing: 4px;
   }
 
   .hero-contenido p {
-    font-size: 16px;
-    margin-bottom: 24px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
   }
 
   .hero-botones {
@@ -321,9 +462,15 @@ footer {
     gap: 12px;
   }
 
+  .btn {
+    padding: 14px 28px;
+    font-size: 13px;
+    text-align: center;
+  }
+
   .flecha {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     font-size: 16px;
   }
 
@@ -331,12 +478,18 @@ footer {
   .flecha-der { right: 8px; }
 
   .servicios {
-    padding: 40px 20px;
+    padding: 60px 20px;
   }
 
   .titulo-seccion {
-    font-size: 26px;
-    margin-bottom: 30px;
+    font-size: 28px;
   }
 
+  .subtitulo-seccion {
+    font-size: 13px;
+  }
+
+  .tarjeta-servicio {
+    padding: 32px 20px 28px;
+  }
 }
