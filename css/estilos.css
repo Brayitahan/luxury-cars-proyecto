@@ -336,6 +336,69 @@ nav a.activo::after {
   gap: 30px;
 }
 
+/* ============================================
+   BASE DE TARJETAS — patrón hover unificado
+   ============================================ */
+.tarjeta-servicio,
+.trabajo-card,
+.contacto-card,
+.servicio-rapido-card,
+.item-elegirnos,
+.testimonio {
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  transition: all var(--transicion-suave);
+  position: relative;
+  overflow: hidden;
+}
+
+.tarjeta-servicio::before,
+.trabajo-card::before,
+.contacto-card::before,
+.servicio-rapido-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
+  opacity: 0;
+  transition: opacity var(--transicion-suave);
+}
+
+.tarjeta-servicio:hover,
+.trabajo-card:hover,
+.contacto-card:hover,
+.servicio-rapido-card:hover,
+.item-elegirnos:hover,
+.testimonio:hover {
+  border-color: var(--color-dorado);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), var(--sombra-dorada);
+}
+
+.tarjeta-servicio:hover,
+.contacto-card:hover {
+  transform: translateY(-8px);
+}
+
+.trabajo-card:hover,
+.servicio-rapido-card:hover {
+  transform: translateY(-6px);
+}
+
+.item-elegirnos:hover,
+.testimonio:hover {
+  transform: translateY(-4px);
+}
+
+.tarjeta-servicio:hover::before,
+.trabajo-card:hover::before,
+.contacto-card:hover::before,
+.servicio-rapido-card:hover::before {
+  opacity: 1;
+}
+
 .tarjeta-servicio {
   background-color: var(--color-fondo-claro);
   background-image:
@@ -353,35 +416,8 @@ nav a.activo::after {
       rgba(212, 175, 55, 0.02) 24px,
       rgba(212, 175, 55, 0.02) 25px
     );
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
   padding: 44px 28px 36px;
   text-align: center;
-  transition: all var(--transicion-suave);
-  position: relative;
-  overflow: hidden;
-}
-
-.tarjeta-servicio::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
-  opacity: 0;
-  transition: opacity var(--transicion-suave);
-}
-
-.tarjeta-servicio:hover {
-  border-color: var(--color-dorado);
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), var(--sombra-dorada);
-}
-
-.tarjeta-servicio:hover::before {
-  opacity: 1;
 }
 
 /* ============================================
@@ -489,42 +525,6 @@ nav a.activo::after {
 .fade-in-d3 { transition-delay: 0.3s; }
 .fade-in-d4 { transition-delay: 0.4s; }
 
-.banner-seccion {
-  position: relative;
-  min-height: 40vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.banner-seccion .overlay-oscuro {
-  background: rgba(0, 0, 0, 0.65);
-}
-
-.banner-contenido {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.banner-contenido h2 {
-  font-size: 44px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.banner-contenido p {
-  font-size: 18px;
-  font-weight: 300;
-  color: var(--color-texto-secundario);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-}
-
 .intro-servicios {
   max-width: 720px;
   margin: -30px auto 50px;
@@ -561,15 +561,6 @@ nav a.activo::after {
 .item-elegirnos {
   text-align: center;
   padding: 40px 24px;
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
-  transition: all var(--transicion-suave);
-}
-
-.item-elegirnos:hover {
-  border-color: var(--color-dorado);
-  box-shadow: var(--sombra-dorada);
-  transform: translateY(-4px);
 }
 
 .icono-circular {
@@ -732,50 +723,6 @@ nav a.activo::after {
   transform: translateY(-2px);
 }
 
-.info-horarios {
-  padding: 40px 24px;
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
-  transition: all var(--transicion-suave);
-}
-
-.info-horarios:hover {
-  border-color: var(--color-dorado);
-  box-shadow: var(--sombra-dorada);
-}
-
-.info-horarios h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--color-dorado);
-  margin-bottom: 24px;
-  letter-spacing: 1px;
-  text-align: center;
-}
-
-.fila-horario {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid #222;
-}
-
-.fila-horario:last-child {
-  border-bottom: none;
-}
-
-.fila-horario .dia {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--color-texto);
-}
-
-.fila-horario .hora {
-  font-size: 15px;
-  font-weight: 300;
-  color: var(--color-texto-secundario);
-}
-
 .testimonios {
   padding: 100px 60px;
   background-color: var(--color-fondo-claro);
@@ -795,10 +742,7 @@ nav a.activo::after {
 
 .testimonio {
   padding: 36px 28px;
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
   text-align: center;
-  transition: all var(--transicion-suave);
   position: relative;
 }
 
@@ -812,12 +756,6 @@ nav a.activo::after {
   left: 20px;
   line-height: 1;
   font-family: serif;
-}
-
-.testimonio:hover {
-  border-color: var(--color-dorado);
-  box-shadow: var(--sombra-dorada);
-  transform: translateY(-4px);
 }
 
 .testimonio-texto {
@@ -1217,34 +1155,7 @@ nav a.activo::after {
 
 .trabajo-card {
   background-color: var(--color-fondo-claro);
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
   padding: 28px;
-  transition: all var(--transicion-suave);
-  position: relative;
-  overflow: hidden;
-}
-
-.trabajo-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
-  opacity: 0;
-  transition: opacity var(--transicion-suave);
-}
-
-.trabajo-card:hover {
-  border-color: var(--color-dorado);
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), var(--sombra-dorada);
-}
-
-.trabajo-card:hover::before {
-  opacity: 1;
 }
 
 .trabajo-titulo {
@@ -1340,37 +1251,10 @@ nav a.activo::after {
 .contacto-card {
   display: block;
   background-color: var(--color-fondo-claro);
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
   padding: 44px 28px 36px;
   text-align: center;
-  transition: all var(--transicion-suave);
-  position: relative;
-  overflow: hidden;
   text-decoration: none;
   cursor: pointer;
-}
-
-.contacto-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
-  opacity: 0;
-  transition: opacity var(--transicion-suave);
-}
-
-.contacto-card:hover {
-  border-color: var(--color-dorado);
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), var(--sombra-dorada);
-}
-
-.contacto-card:hover::before {
-  opacity: 1;
 }
 
 .contacto-icono {
@@ -1440,25 +1324,6 @@ a.contacto-card:hover .contacto-accion {
 }
 
 /* ============================================
-   BIENVENIDO
-   ============================================ */
-.bienvenido {
-  padding: 100px 60px;
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.bienvenido-texto {
-  font-size: 17px;
-  font-weight: 300;
-  color: var(--color-texto-secundario);
-  line-height: 1.9;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-/* ============================================
    SERVICIOS RÁPIDOS — HOME
    ============================================ */
 .servicios-rapidos {
@@ -1476,36 +1341,9 @@ a.contacto-card:hover .contacto-accion {
 .servicio-rapido-card {
   display: block;
   background-color: var(--color-fondo-claro);
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
   padding: 36px 20px 28px;
   text-align: center;
   text-decoration: none;
-  transition: all var(--transicion-suave);
-  position: relative;
-  overflow: hidden;
-}
-
-.servicio-rapido-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
-  opacity: 0;
-  transition: opacity var(--transicion-suave);
-}
-
-.servicio-rapido-card:hover {
-  border-color: var(--color-dorado);
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), var(--sombra-dorada);
-}
-
-.servicio-rapido-card:hover::before {
-  opacity: 1;
 }
 
 .servicio-rapido-icono {
@@ -1524,15 +1362,8 @@ a.contacto-card:hover .contacto-accion {
   font-size: 18px;
   font-weight: 600;
   color: var(--color-dorado);
-  margin-bottom: 8px;
+  margin-bottom: 0;
   letter-spacing: 1px;
-}
-
-.servicio-rapido-card p {
-  font-size: 13px;
-  color: var(--color-texto-secundario);
-  font-weight: 300;
-  line-height: 1.7;
 }
 
 /* ============================================
@@ -1788,16 +1619,6 @@ footer {
     padding: 32px 20px 28px;
   }
 
-  .banner-contenido h2 {
-    font-size: 28px;
-    letter-spacing: 2px;
-  }
-
-  .banner-contenido p {
-    font-size: 14px;
-    letter-spacing: 2px;
-  }
-
   .intro-servicios {
     margin-top: -20px;
   }
@@ -1830,7 +1651,8 @@ footer {
 
   .grid-ubicacion {
     grid-template-columns: 1fr;
-    gap: 24px;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   .testimonios {
@@ -1840,14 +1662,6 @@ footer {
   .grid-testimonios {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-
-  .bienvenido {
-    padding: 60px 20px;
-  }
-
-  .bienvenido-texto {
-    font-size: 15px;
   }
 
   .servicios-rapidos {
@@ -1871,10 +1685,6 @@ footer {
 
   .servicio-rapido-card h3 {
     font-size: 15px;
-  }
-
-  .servicio-rapido-card p {
-    font-size: 12px;
   }
 
   .numeros {
