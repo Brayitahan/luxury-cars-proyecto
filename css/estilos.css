@@ -784,6 +784,370 @@ nav a.activo::after {
 }
 
 /* ============================================
+   HERO — SERVICIOS (tipográfico con tags)
+   ============================================ */
+.hero-servicios {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #0d0d0d 0%, #161616 50%, #0d0d0d 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-servicios::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 50px,
+      rgba(212, 175, 55, 0.025) 50px,
+      rgba(212, 175, 55, 0.025) 51px
+    ),
+    radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-servicios-contenido {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 800px;
+}
+
+.hero-servicios-badge {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hero-servicios-contenido h2 {
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+
+.hero-servicios-contenido h2 span {
+  color: var(--color-dorado);
+  display: block;
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 6px;
+  margin-top: 6px;
+  text-transform: none;
+}
+
+.hero-servicios-tags {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.hero-servicios-tag {
+  padding: 8px 22px;
+  border: 1px solid var(--color-dorado);
+  border-radius: 4px;
+  color: var(--color-dorado);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all var(--transicion-suave);
+  cursor: default;
+}
+
+.hero-servicios-tag:hover {
+  background: var(--color-dorado);
+  color: #000;
+}
+
+.hero-servicios-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .hero-servicios {
+    min-height: 60vh;
+  }
+
+  .hero-servicios-contenido h2 {
+    font-size: 34px;
+    letter-spacing: 2px;
+  }
+
+  .hero-servicios-contenido h2 span {
+    font-size: 20px;
+    letter-spacing: 4px;
+  }
+
+  .hero-servicios-tag {
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+}
+
+/* ============================================
+   HERO — INVENTARIO (grid de imágenes 2×2)
+   ============================================ */
+.hero-inventario {
+  position: relative;
+  min-height: 75vh;
+  overflow: hidden;
+}
+
+.hero-inventario-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.hero-inventario-cell {
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s ease;
+}
+
+.hero-inventario:hover .hero-inventario-cell {
+  transform: scale(1.03);
+}
+
+.hero-inventario-contenido {
+  position: relative;
+  z-index: 10;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.hero-inventario-contenido h2 {
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+
+.hero-inventario-contenido p {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) {
+  .hero-inventario {
+    min-height: 60vh;
+  }
+
+  .hero-inventario-contenido {
+    min-height: 60vh;
+  }
+
+  .hero-inventario-contenido h2 {
+    font-size: 34px;
+    letter-spacing: 2px;
+  }
+
+  .hero-inventario-contenido p {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+}
+
+/* ============================================
+   HERO — CONTACTO (split con patrón)
+   ============================================ */
+.hero-contacto {
+  min-height: 70vh;
+  display: flex;
+}
+
+.hero-contacto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+.hero-contacto-texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 60px 60px 80px;
+}
+
+.hero-contacto-badge {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hero-contacto-texto h2 {
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.hero-contacto-texto h2 span {
+  color: var(--color-dorado);
+  display: block;
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 6px;
+  margin-top: 6px;
+  text-transform: none;
+}
+
+.hero-contacto-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+.hero-contacto-links {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero-contacto-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-texto);
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: color var(--transicion-suave);
+  width: fit-content;
+}
+
+.hero-contacto-link:hover {
+  color: var(--color-dorado);
+}
+
+.hero-contacto-link img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.hero-contacto-icono-correo {
+  font-size: 24px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.hero-contacto-visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-fondo-claro);
+}
+
+.hero-contacto-patron {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 36px,
+      rgba(212, 175, 55, 0.035) 36px,
+      rgba(212, 175, 55, 0.035) 37px
+    ),
+    radial-gradient(circle at 70% 40%, rgba(212, 175, 55, 0.07) 0%, transparent 50%);
+}
+
+.hero-contacto-patron::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(212, 175, 55, 0.1);
+  border-radius: 50%;
+}
+
+.hero-contacto-patron::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border: 1px solid rgba(212, 175, 55, 0.07);
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .hero-contacto {
+    min-height: auto;
+  }
+
+  .hero-contacto-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-contacto-texto {
+    padding: 60px 24px;
+    min-height: 60vh;
+  }
+
+  .hero-contacto-texto h2 {
+    font-size: 34px;
+    letter-spacing: 2px;
+  }
+
+  .hero-contacto-texto h2 span {
+    font-size: 20px;
+    letter-spacing: 4px;
+  }
+
+  .hero-contacto-visual {
+    display: none;
+  }
+}
+
+/* ============================================
    INVENTARIO — GALERÍA ANTES / DESPUÉS
    ============================================ */
 .inventario {
