@@ -144,6 +144,52 @@ Agregadas a `servicios.html`:
 
 ---
 
+## Sesión 8 — Página de Contacto
+
+### Creación de `contacto.html`
+- Hero dividido en dos columnas: texto con datos de contacto + panel decorativo con patrón dorado y círculos concéntricos
+- Tarjeta de WhatsApp con enlace directo a `wa.me/573043228031`
+- Tarjeta de correo con `unadostrescuatro5@gmail.com`
+- Sección inferior "Estamos Aquí para Ti" con las dos tarjetas de contacto
+- Mismo estilo visual (fondo oscuro, dorado, fade-in, divisor con rombo)
+- Diseño responsive: en móvil el panel decorativo se oculta y las tarjetas se apilan
+- Número de WhatsApp actualizado en el sitio (ya no placeholder)
+
+### Commit
+- `87fa43e` — feat: crea página de contacto con WhatsApp y correo
+
+---
+
+## Sesión 9 — Heroes únicos para cada página
+
+### Problema
+Las páginas de servicios, inventario y contacto compartían el mismo banner genérico (`.banner-seccion` con imagen de fondo + overlay + texto), dando una sensación repetitiva.
+
+### Solución
+Cada página tiene ahora su propio tratamiento de hero:
+
+| Página | Estilo de hero | Descripción |
+|---|---|---|
+| Servicios | **Tipográfico con tags** | Fondo oscuro con patrón diagonal sutil, título "Cuidado Automotriz", los 4 servicios como tags con borde dorado, sin imagen de fondo |
+| Inventario | **Grid de imágenes 2×2** | 4 fotos del taller en cuadrícula como fondo, overlay oscuro, título y subtítulo centrados con text-shadow |
+| Contacto | **Split con patrón decorativo** | Mitad izquierda texto con datos de contacto, mitad derecha panel con patrón diagonal dorado y círculos concéntricos decorativos |
+
+### CSS agregado
+- `.hero-servicios`, `.hero-servicios-contenido`, `.hero-servicios-badge`, `.hero-servicios-tags`, `.hero-servicios-tag`, `.hero-servicios-sub`
+- `.hero-inventario`, `.hero-inventario-grid`, `.hero-inventario-cell`, `.hero-inventario-contenido`
+- `.hero-contacto`, `.hero-contacto-grid`, `.hero-contacto-texto`, `.hero-contacto-badge`, `.hero-contacto-sub`, `.hero-contacto-links`, `.hero-contacto-link`, `.hero-contacto-icono-correo`, `.hero-contacto-visual`, `.hero-contacto-patron`
+- Todos con responsive para ≤768px
+
+### Detalles de diseño
+- Servicios: fondo con gradiente oscuro + líneas diagonales a 45° con opacidad 0.025 + radial glow. Tags con hover que se rellenan de dorado.
+- Inventario: grid absoluto 2×2, hover hace zoom suave (scale 1.03) en toda la cuadrícula. Overlay y texto con text-shadow para legibilidad.
+- Contacto: split 50/50, lado visual con patrón diagonal + dos círculos concéntricos decorativos (como un volante o halo). En móvil se oculta el lado visual.
+
+### Commits
+- `d9ee92b` — refactor: heroes únicos para cada página (tipográfico, grid imagenes, split)
+
+---
+
 ## Estado actual del proyecto
 
 ### Páginas
@@ -152,7 +198,7 @@ Agregadas a `servicios.html`:
 | `index.html` | ✅ Completo — carrusel hero (5 diapositivas, avance automático 5s) |
 | `servicios.html` | ✅ Completo — banner, 4 tarjetas, por qué elegirnos, proceso, ubicación, testimonios |
 | `inventario.html` | ✅ Completo — galería antes/después con 6 trabajos |
-| `contacto.html` | ❌ No existe — enlazado en el nav |
+| `contacto.html` | ✅ Completo — hero split con WhatsApp y correo |
 
 ### Archivos clave
 - `css/estilos.css` — ~920 líneas, tema oscuro con propiedades CSS personalizadas (`--color-dorado`, etc.)
