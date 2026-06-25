@@ -160,7 +160,7 @@ Agregadas a `servicios.html`:
 - `data/` — contiene copias obsoletas de los HTML raíz y `servicios.json` (no usado)
 
 ### Pendientes / recordatorios
-- Número de WhatsApp en placeholder (`573001234567`) — el usuario debe actualizarlo
+- ~~Número de WhatsApp en placeholder (`573001234567`)~~ → ya actualizado en contacto.html (`3043228031`)
 - Dirección en Ubicación es placeholder — el usuario debe actualizarla
 - Testimonios actuales son placeholder — editables directamente en HTML
 - No hay herramientas de test/lint/formato configuradas

@@ -903,6 +903,102 @@ nav a.activo::after {
   line-height: 1.7;
 }
 
+/* ============================================
+   CONTACTO
+   ============================================ */
+.contacto {
+  padding: 100px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-contacto {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.contacto-card {
+  display: block;
+  background-color: var(--color-fondo-claro);
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 44px 28px 36px;
+  text-align: center;
+  transition: all var(--transicion-suave);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.contacto-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
+  opacity: 0;
+  transition: opacity var(--transicion-suave);
+}
+
+.contacto-card:hover {
+  border-color: var(--color-dorado);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), var(--sombra-dorada);
+}
+
+.contacto-card:hover::before {
+  opacity: 1;
+}
+
+.contacto-icono {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contacto-icono img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.contacto-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-dorado);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.contacto-valor {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-texto);
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.contacto-accion {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-texto-secundario);
+  letter-spacing: 1px;
+  transition: color var(--transicion-suave);
+}
+
+a.contacto-card:hover .contacto-accion {
+  color: var(--color-dorado);
+}
+
 @media (max-width: 768px) {
   .inventario {
     padding: 60px 20px;
@@ -914,6 +1010,15 @@ nav a.activo::after {
 
   .comparacion {
     grid-template-columns: 1fr;
+  }
+
+  .contacto {
+    padding: 60px 20px;
+  }
+
+  .grid-contacto {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 
