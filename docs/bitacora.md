@@ -160,7 +160,21 @@ Agregadas a `servicios.html`:
 
 ---
 
-## Sesión 11 — Mejora visual de las tarjetas de servicios
+## Sesión 12 — Footer unificado y limpieza
+
+### Problemas
+- El footer nuevo solo estaba en index.html, las demás páginas tenían el footer viejo (solo copyright)
+- El enlace "Saber más" en tarjetas de servicios no tenía sentido (linkeaba a la misma página)
+
+### Cambios
+- Footer reemplazado en servicios.html, inventario.html y contacto.html con el mismo diseño (logo + navegación + horarios + divisor dorado)
+- Script.js movido al final del body en servicios.html e inventario.html (contacto.html ya lo tenía bien)
+- Eliminado `.tarjeta-enlace` de HTML y CSS
+
+### Commit
+- `1663612` — fix: unifica footer en todas las paginas y elimina enlace saber mas
+
+---
 
 ### Problema
 Las tarjetas de servicios se veían simples y sin personalidad. Fondo liso, solo icono + texto, sin elementos decorativos ni interactividad.
