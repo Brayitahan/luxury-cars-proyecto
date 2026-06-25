@@ -160,7 +160,25 @@ Agregadas a `servicios.html`:
 
 ---
 
-## Sesión 10 — Home completo y footer rediseñado
+## Sesión 11 — Mejora visual de las tarjetas de servicios
+
+### Problema
+Las tarjetas de servicios se veían simples y sin personalidad. Fondo liso, solo icono + texto, sin elementos decorativos ni interactividad.
+
+### Cambios
+
+**Textura de lujo**: patrón de diamante CSS en el fondo de cada tarjeta (inspirado en costura de asientos de cuero de autos de lujo). Dos capas de líneas diagonales cruzadas a 45° con opacidad muy sutil.
+
+**Números decorativos**: cada tarjeta tiene un número grande (01–04) en la esquina inferior derecha, muy tenue (opacidad 0.05), como watermark de lujo.
+
+**Línea dorada bajo el título**: cada `h3` tiene una línea dorada centrada que se expande de 32px → 70px al hacer hover.
+
+**Enlace "Saber más"**: aparece al hover con fade + deslizamiento hacia arriba. Enlace a servicios.html (preparado para sección detalle).
+
+### Commits
+- `5510422` — feat: mejora tarjetas de servicios con textura diamante, numeros decorativos y enlace hover
+
+---
 
 ### Problema
 El home solo tenía el hero del carrusel y un footer minimalista con copyright. Se sentía vacío. El footer era igual en todas las páginas pero muy básico.
