@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Cars | Inicio</title>
+
+<!-- ============================================
+     GOOGLE FONTS: Advent Pro
+     Esta línea le dice al navegador: "antes de
+     pintar la página, ve a buscar esta fuente".
+     wght@300..700 = trae varios grosores (pesos)
+     de una sola vez, para no pedir uno por uno.
+     ============================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- ============================================
+       HEADER: este bloque se repite IDÉNTICO en
+       las 4 páginas (index, servicios, inventario,
+       contacto). Por ahora lo copiamos manualmente;
+       más adelante te muestro cómo evitar esto.
+       ============================================ -->
+  <header>
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo Luxury Cars" class="logo-img">
+    </div>
+    <nav>
+      <ul>
+        <!-- class="activo" marca en cuál página estamos -->
+        <li><a href="index.html" class="activo">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="inventario.html">Inventario</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============================================
+       SECCIÓN HERO con CARRUSEL de imágenes
+       - Cada <div class="slide"> es una foto candidata
+       - Solo la que tiene la clase "activa" se ve
+       - Las flechas llaman a funciones de JavaScript
+         que están definidas en js/script.js
+       ============================================ -->
+  <section class="hero">
+
+    <div class="carrusel">
+      <div class="slide activa" style="background-image: url('img/hero/taller-1.jpg');"></div>
+      <div class="slide" style="background-image: url('img/hero/taller-2.jpg');"></div>
+      <div class="slide" style="background-image: url('img/hero/taller-3.jpg');"></div>
+      <div class="slide" style="background-image: url('img/hero/taller-4.jpg');"></div>
+      <div class="slide" style="background-image: url('img/hero/taller-5.jpg');"></div>
+    </div>
+
+    <!-- Esta capa oscura va ENCIMA de las fotos, para que el texto se lea bien -->
+    <div class="overlay-oscuro"></div>
+
+    <!-- Flechas de navegación manual.
+         onclick="..." ejecuta una función de JavaScript
+         apenas el usuario hace click -->
+    <button class="flecha flecha-izq" onclick="imagenAnterior()">&#10094;</button>
+    <button class="flecha flecha-der" onclick="imagenSiguiente()">&#10095;</button>
+
+    <!-- El contenido de texto va POR ENCIMA de todo (z-index) -->
+    <div class="hero-contenido">
+      <h1>Luxury Cars: <span>Excelencia en Cada Detalle</span></h1>
+      <p>Your Passion, Our Excellence</p>
+      <div class="hero-botones">
+        <a href="servicios.html" class="btn btn-primario">Explora Nuestros Servicios</a>
+        <a href="inventario.html" class="btn btn-secundario">Conoce Nuestro Inventario</a>
+      </div>
+    </div>
+
+  </section>
+
+  <script src="js/script.js"></script>
+
+  <!-- ============================================
+       FOOTER simple, se repite en todas las páginas
+       ============================================ -->
+  <footer>
+    <p>&copy; 2026 Luxury Cars. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>

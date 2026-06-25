@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Pintura Automotriz",
+    "descripcion": "Acabados de precisión con pintura de alta calidad y protección UV.",
+    "icono": "pintura"
+  },
+  {
+    "id": 2,
+    "nombre": "Latonería",
+    "descripcion": "Reparaciones de carrocería, restauración de paneles y abolladuras.",
+    "icono": "latoneria"
+  },
+  {
+    "id": 3,
+    "nombre": "Polichada",
+    "descripcion": "Pulido profesional para eliminar imperfecciones y lograr brillo espejo.",
+    "icono": "polichada"
+  },
+  {
+    "id": 4,
+    "nombre": "Cerámica",
+    "descripcion": "Revestimiento cerámico premium para protección duradera contra arañazos y contaminantes.",
+    "icono": "ceramica"
+  }
+]

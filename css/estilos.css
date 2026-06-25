@@ -1,0 +1,342 @@
+/* ============================================
+   RESET BÁSICO
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   VARIABLES CSS
+   Un solo lugar para cambiar colores y fuentes
+   en todo el sitio.
+   ============================================ */
+:root {
+  --color-fondo: #0d0d0d;
+  --color-fondo-claro: #1a1a1a;
+  --color-dorado: #d4af37;
+  --color-dorado-claro: #f0d878;
+  --color-texto: #f5f5f5;
+  --color-texto-secundario: #b0b0b0;
+  --fuente-principal: 'Advent Pro', sans-serif;
+}
+
+body {
+  font-family: var(--fuente-principal);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+/* ============================================
+   HEADER / NAVEGACIÓN
+   ============================================ */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: rgba(13, 13, 13, 0.95);
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 50px;
+  width: auto; /* el ancho se ajusta solo, respetando la proporción original */
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+nav a {
+  color: var(--color-texto);
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--color-dorado);
+}
+
+/* .activo marca el link de la página en la que estamos parados */
+nav a.activo {
+  color: var(--color-dorado);
+  border-bottom: 2px solid var(--color-dorado);
+  padding-bottom: 4px;
+}
+
+/* ============================================
+   SECCIÓN HERO (contenedor general)
+   position: relative es CLAVE: permite que los
+   elementos hijos (slides, overlay, flechas)
+   se posicionen "absolute" tomando este bloque
+   como referencia, no toda la página.
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 85vh;
+  overflow: hidden; /* nada se desborda fuera de esta caja */
+}
+
+/* Contenedor de las imágenes del carrusel */
+.carrusel {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+/* Cada foto candidata: ocupa TODO el espacio del hero,
+   pero está invisible (opacity: 0) hasta que tenga
+   la clase .activa */
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out; /* el fundido suave */
+}
+
+.slide.activa {
+  opacity: 1;
+}
+
+/* Capa negra semi-transparente encima de las fotos,
+   para que el texto blanco/dorado se siga leyendo */
+.overlay-oscuro {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* El texto y botones, por encima de todo gracias a z-index */
+.hero-contenido {
+  position: relative;
+  z-index: 10;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-contenido h1 {
+  font-size: 52px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--color-texto);
+}
+
+.hero-contenido h1 span {
+  color: var(--color-dorado);
+}
+
+.hero-contenido p {
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-texto-secundario);
+  margin-bottom: 36px;
+}
+
+.hero-botones {
+  display: flex;
+  gap: 20px;
+}
+
+/* Flechas de navegación manual */
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--color-dorado);
+  color: var(--color-dorado);
+  font-size: 22px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.flecha:hover {
+  background: var(--color-dorado);
+  color: #000;
+}
+
+.flecha-izq { left: 24px; }
+.flecha-der { right: 24px; }
+
+.btn {
+  padding: 14px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-primario {
+  background-color: var(--color-dorado);
+  color: #000;
+}
+
+.btn-secundario {
+  background-color: transparent;
+  color: var(--color-texto);
+  border: 1px solid var(--color-dorado);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* ============================================
+   SECCIÓN SERVICIOS
+   ============================================ */
+.servicios {
+  padding: 80px 60px;
+  max-width: 1200px;
+  margin: 0 auto; /* centra el bloque horizontalmente */
+}
+
+.titulo-seccion {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 50px;
+  color: var(--color-dorado);
+}
+
+/* CSS Grid: organiza las tarjetas en una grilla
+   que se acomoda sola según el tamaño de pantalla.
+   minmax(260px, 1fr) = cada columna mide al menos
+   260px, pero crece para llenar el espacio. */
+.grid-servicios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.tarjeta-servicio {
+  background-color: var(--color-fondo-claro);
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 36px 28px;
+  text-align: center;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.tarjeta-servicio:hover {
+  border-color: var(--color-dorado);
+  transform: translateY(-6px); /* la tarjeta "flota" un poco al pasar el mouse */
+}
+
+.icono-servicio {
+  width: 80px;
+  height: 80px;
+  object-fit: contain; /* mantiene la proporción de la imagen sin deformarla */
+  margin-bottom: 18px;
+}
+
+.tarjeta-servicio h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-dorado);
+  margin-bottom: 12px;
+}
+
+.tarjeta-servicio p {
+  font-size: 15px;
+  color: var(--color-texto-secundario);
+  font-weight: 300;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  text-align: center;
+  padding: 24px;
+  background-color: var(--color-fondo-claro);
+  color: var(--color-texto-secundario);
+  font-size: 14px;
+  border-top: 1px solid #2a2a2a;
+}
+
+/* ============================================
+   RESPONSIVE — CELULAR (pantallas ≤ 768px)
+   ============================================ */
+@media (max-width: 768px) {
+
+  header {
+    padding: 14px 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo-img {
+    height: 36px;
+  }
+
+  nav ul {
+    gap: 16px;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+
+  .hero-contenido h1 {
+    font-size: 32px;
+  }
+
+  .hero-contenido p {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .hero-botones {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .flecha {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .flecha-izq { left: 8px; }
+  .flecha-der { right: 8px; }
+
+  .servicios {
+    padding: 40px 20px;
+  }
+
+  .titulo-seccion {
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+
+}
