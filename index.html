@@ -19,7 +19,7 @@
 <!-- Favicon: icono en la pestaña del navegador -->
 <link rel="icon" type="image/png" sizes="48x48" href="img/favicon.png">
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://maps.gstatic.com https://*.googleapis.com https://*.ggpht.com; connect-src 'self'; frame-src 'self' https://www.google.com https://maps.google.com;">
 
 <!-- ============================================
      GOOGLE FONTS: Advent Pro
@@ -30,7 +30,7 @@
      ============================================ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -49,13 +49,16 @@
     <nav>
       <ul>
         <!-- class="activo" marca en cuál página estamos -->
-        <li><a href="index.html" class="activo">Inicio</a></li>
+        <li><a href="index.html" class="activo" aria-current="page">Inicio</a></li>
         <li><a href="servicios.html">Servicios</a></li>
         <li><a href="inventario.html">Inventario</a></li>
         <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="admin.html" class="nav-admin" title="Panel de administración">&#9881;</a></li>
       </ul>
     </nav>
   </header>
+
+  <main>
 
   <section class="hero">
 
@@ -86,11 +89,11 @@
   </section>
 
   <!-- ============================================
-       SERVICIOS RÁPIDOS
+       MAPA TALLER
        ============================================ -->
-  <section class="servicios-rapidos">
-    <p class="subtitulo-seccion fade-in">Nuestros Servicios</p>
-    <h2 class="titulo-seccion fade-in">Qué Ofrecemos</h2>
+  <section class="mapa-taller">
+    <p class="subtitulo-seccion fade-in">Visítanos</p>
+    <h2 class="titulo-seccion fade-in">Ubicación del Taller</h2>
 
     <div class="divisor-dorado fade-in">
       <span class="linea"></span>
@@ -98,28 +101,21 @@
       <span class="linea"></span>
     </div>
 
-    <div class="grid-servicios-rapidos">
+    <div class="intro-servicios fade-in">
+      <p>Estamos en La Ceja, Antioquia. Te esperamos para devolverle el brillo a tu auto.</p>
+    </div>
 
-      <a href="servicios.html" class="servicio-rapido-card fade-in fade-in-d1">
-        <img src="img/iconos/pintura.png" alt="Pintura automotriz" class="servicio-rapido-icono">
-        <h3>Pintura Automotriz</h3>
-      </a>
-
-      <a href="servicios.html" class="servicio-rapido-card fade-in fade-in-d2">
-        <img src="img/iconos/latoneria.png" alt="Latonería" class="servicio-rapido-icono">
-        <h3>Latonería</h3>
-      </a>
-
-      <a href="servicios.html" class="servicio-rapido-card fade-in fade-in-d3">
-        <img src="img/iconos/polichada.png" alt="Polichada" class="servicio-rapido-icono">
-        <h3>Polichada</h3>
-      </a>
-
-      <a href="servicios.html" class="servicio-rapido-card fade-in fade-in-d4">
-        <img src="img/iconos/ceramica.png" alt="Recubrimiento cerámico" class="servicio-rapido-icono">
-        <h3>Cerámica</h3>
-      </a>
-
+    <div class="mapa-contenedor fade-in">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.1332!2d-75.4115244!3d6.0395142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4699005cb65f2f%3A0x9f6975f509892d6!2sLuxury%20Cars!5e0!3m2!1ses!2sco!4v1"
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Mapa - Luxury Cars">
+      </iframe>
     </div>
   </section>
 
@@ -165,15 +161,17 @@
     </div>
   </section>
 
+  </main>
+
   <footer>
     <div class="footer-grid">
       <div class="footer-col footer-brand">
         <img src="img/logo.png" alt="Luxury Cars" class="footer-logo-img">
-        <p class="footer-desc">Taller automotriz especializado en pintura, latonería y acabados de lujo. Calidad que se ve y se siente.</p>
+        <p class="footer-desc">Taller automotriz con diez años restaurando vehículos en Bogotá. Pintura, latonería, polichada y cerámica. Cada trabajo tiene garantía escrita.</p>
       </div>
 
       <div class="footer-col footer-nav">
-        <h4>Navegación</h4>
+        <h3>Navegación</h3>
         <ul>
           <li><a href="index.html">Inicio</a></li>
           <li><a href="servicios.html">Servicios</a></li>
@@ -183,7 +181,7 @@
       </div>
 
       <div class="footer-col footer-horario">
-        <h4>Horarios</h4>
+        <h3>Horarios</h3>
         <p>Lun — Vie: 8:00 AM — 6:00 PM</p>
         <p>Sáb: 8:00 AM — 2:00 PM</p>
         <p class="footer-horario-domingo">Dom: Cerrado</p>

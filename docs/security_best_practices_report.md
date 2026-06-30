@@ -1,91 +1,56 @@
-# Reporte de Seguridad — Luxury Cars
+# Security Best Practices Report — Luxury Cars
 
-**Fecha:** 25/06/2026
-**Proyecto:** Sitio web estático (HTML + CSS + JS vanilla)
-**Propósito:** Página informativa de taller automotriz (sin backend, sin autenticación, sin captura de datos)
+## Executive Summary
 
----
-
-## Resumen Ejecutivo
-
-El proyecto es un sitio estático puro, lo que reduce drásticamente la superficie de ataque. No hay backend, bases de datos, formularios, cookies de sesión, ni almacenamiento de datos sensibles. Los hallazgos son de **bajo riesgo** y se centran en mejoras defensivas. No hay vulnerabilidades críticas ni altas.
+Luxury Cars es un sitio web estático (HTML + CSS + JS vanilla) sin formularios, sin backend, sin almacenamiento de datos de usuario, y sin dependencias de terceros aparte de Google Fonts. El perfil de riesgo es inherentemente bajo. Se encontraron 3 hallazgos: 1 de severidad **Media** y 2 de severidad **Low**.
 
 ---
 
-## Hallazgos
-
-### ID-01: Falta Content Security Policy (CSP)
+## Finding LC-01 — Script tag duplicado en 3 páginas (Media)
 
 | Campo | Valor |
 |---|---|
-| **Regla** | JS-CSP-001 |
-| **Severidad** | Baja (informativa) |
-| **Ubicación** | `index.html`, `servicios.html` |
-| **Evidencia** | No hay `<meta http-equiv="Content-Security-Policy">` ni cabecera CSP en ningún archivo |
-| **Impacto** | Sin CSP, si en el futuro se introduce una vulnerabilidad XSS, no hay capa defensiva adicional |
-| **Fix** | Agregar CSP vía `<meta>` en el `<head>` de cada página |
-
-```html
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self';">
-```
+| **Rule ID** | JS-CSP-002 / Quality |
+| **Severity** | Media |
+| **Location** | `servicios.html:224` (extra en 261), `inventario.html:172` (extra en 209), `contacto.html:103` (extra en 140) |
+| **Evidence** | Cada uno de estos archivos tiene `<script src="js/script.js"></script>` dos veces. El segundo bloque está antes del `</body>` después del `<footer>`. |
+| **Impact** | `script.js` se ejecuta dos veces en esas páginas. Esto duplica listeners de eventos, crea dos `IntersectionObserver`, dos `setInterval`, etc. Puede causar comportamientos erráticos en el carrusel (transiciones dobles) y degradación de rendimiento. |
+| **Fix** | Eliminar la segunda ocurrencia de `<script src="js/script.js"></script>` en cada archivo (la que está después del `<footer>`). |
 
 ---
 
-### ID-02: Manejadores de evento inline (`onclick`)
+## Finding LC-02 — Sin Subresource Integrity (SRI) en Google Fonts (Low)
 
 | Campo | Valor |
 |---|---|
-| **Regla** | JS-CSP-002 |
-| **Severidad** | Baja |
-| **Ubicación** | `index.html:70-71` |
-| **Evidencia** | `<button onclick="imagenAnterior()">` y `<button onclick="imagenSiguiente()">` |
-| **Impacto** | Las funciones llamadas (`imagenAnterior`, `imagenSiguiente`) son internas y no reciben datos del usuario. El riesgo real es mínimo, pero impide usar una CSP estricta sin `unsafe-inline` |
-| **Fix** | Reemplazar `onclick` por `addEventListener` en `script.js` |
-
-```html
-<!-- Antes -->
-<button class="flecha flecha-izq" onclick="imagenAnterior()">&#10094;</button>
-<button class="flecha flecha-der" onclick="imagenSiguiente()">&#10095;</button>
-
-<!-- Después (en script.js) -->
-document.querySelector(".flecha-izq").addEventListener("click", imagenAnterior);
-document.querySelector(".flecha-der").addEventListener("click", imagenSiguiente);
-```
+| **Rule ID** | JS-SRI-001 |
+| **Severity** | Low |
+| **Location** | `index.html:33`, `servicios.html:23`, `inventario.html:23`, `contacto.html:23` |
+| **Evidence** | `<link href="https://fonts.googleapis.com/css2?family=Advent+Pro..." rel="stylesheet">` sin atributo `integrity`. |
+| **Impact** | Si el CDN de Google Fonts fuera comprometido, podría servir CSS malicioso. El riesgo es extremadamente bajo dado que es Google, pero la buena práctica es incluir SRI. |
+| **Fix** | Agregar `integrity` al `<link>` de Google Fonts. Sin embargo, Google Fonts no publica hashes estables, por lo que la mitigación práctica es aceptar el riesgo o considerar self-hosting de la fuente. |
+| **Mitigation** | Self-hostear la fuente Advent Pro eliminaría esta dependencia externa por completo. |
 
 ---
 
-### ID-03: Recurso de terceros sin integridad (SRI)
+## Finding LC-03 — CSP con `unsafe-inline` en `style-src` (Low)
 
 | Campo | Valor |
 |---|---|
-| **Regla** | JS-SRI-001 |
-| **Severidad** | Informativa |
-| **Ubicación** | `index.html:31`, `servicios.html:24` |
-| **Evidencia** | Google Fonts se carga desde `https://fonts.googleapis.com` sin atributo `integrity` |
-| **Impacto** | Google Fonts es un recurso CSS/font, no JavaScript. Una alteración del CSS podría cambiar la apariencia pero no ejecutar código. Riesgo extremadamente bajo |
-| **Fix** | No se recomienda SRI para Google Fonts (los hashes cambian). Dejar como está |
+| **Rule ID** | JS-CSP-001 |
+| **Severity** | Low |
+| **Location** | Meta CSP en los 4 archivos HTML (e.g., `index.html:22`) |
+| **Evidence** | `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com` — incluye `unsafe-inline`. |
+| **Impact** | Permite cualquier estilo inline en la página. Esto es necesario porque las diapositivas del carrusel y las celdas del hero usan `style="background-image: url(...)"`. Sin `unsafe-inline`, esas imágenes de fondo no se mostrarían. |
+| **Fix** | No es práctico eliminar `unsafe-inline` sin refactorizar para mover todos los estilos inline a clases CSS o usar CSS custom properties desde JS. El riesgo es mínimo porque no hay contenido generado por usuarios que pueda inyectar estilos arbitrarios. |
+| **Accept** | Riesgo aceptado y documentado. En un sitio estático sin contenido dinámico de usuarios, el riesgo de exfiltración vía CSS inline es insignificante. |
 
 ---
 
-### ID-04: No se detectaron issues en JS
+## Summary
 
-| Ítem | Estado |
-|---|---|
-| `innerHTML` / `outerHTML` / `insertAdjacentHTML` | ✅ No usado |
-| `document.write` | ✅ No usado |
-| `eval` / `new Function` / string setTimeout | ✅ No usado |
-| `localStorage` / `sessionStorage` | ✅ No usado |
-| `postMessage` | ✅ No usado |
-| Navegación dinámica (`window.location`) | ✅ No usado |
-| Clobbering de DOM | ✅ No aplica |
-
----
-
-## Conclusión
-
-El proyecto es **seguro por su simplicidad**. Las únicas mejoras recomendadas son:
-
-1. **(Opcional)** Agregar CSP vía `<meta>` como defensa preventiva
-2. **(Opcional)** Migrar los `onclick` a `addEventListener` para permitir CSP estricta
-
-Ninguna de las dos es urgente para un sitio estático sin formularios ni datos de usuario.
+| ID | Severidad | Descripción | Acción |
+|---|---|---|---|
+| LC-01 | **Media** | Script tag duplicado en 3 páginas | Corregir |
+| LC-02 | Low | Sin SRI en Google Fonts | Aceptado / Self-host |
+| LC-03 | Low | `unsafe-inline` en style-src del CSP | Aceptado |

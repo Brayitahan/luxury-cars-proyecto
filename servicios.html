@@ -20,7 +20,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -33,17 +33,19 @@
     <nav>
       <ul>
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="servicios.html" class="activo">Servicios</a></li>
+        <li><a href="servicios.html" class="activo" aria-current="page">Servicios</a></li>
         <li><a href="inventario.html">Inventario</a></li>
         <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="admin.html" class="nav-admin" title="Panel de administración">&#9881;</a></li>
       </ul>
     </nav>
   </header>
 
+  <main>
   <section class="hero-servicios">
     <div class="hero-servicios-contenido fade-in">
       <p class="hero-servicios-badge">Especialistas en</p>
-      <h2>Cuidado <span>Automotriz</span></h2>
+      <h1>Cuidado <span>Automotriz</span></h1>
       <div class="hero-servicios-tags">
         <span class="hero-servicios-tag">Pintura</span>
         <span class="hero-servicios-tag">Latonería</span>
@@ -65,20 +67,18 @@
     </div>
 
     <div class="intro-servicios fade-in">
-      <p>Trabajamos cada vehículo como si fuera nuestro. Usamos productos de primera calidad y técnicas especializadas para que el resultado sea impecable, de principio a fin.</p>
+      <p>Cada vehículo que entra al taller recibe un tratamiento distinto. Evaluamos la superficie, el color original y el uso que le das a tu auto antes de elegir el proceso. No hay fórmulas universales, solo trabajo hecho a la medida.</p>
     </div>
 
     <div class="grid-servicios">
 
       <div class="tarjeta-servicio fade-in fade-in-d1">
-        <span class="tarjeta-numero">01</span>
         <img src="img/iconos/pintura.png" alt="Icono de pintura automotriz" class="icono-servicio">
         <h3>Pintura Automotriz</h3>
         <p>Acabados de precisión con pintura de alta calidad y protección UV.</p>
       </div>
 
       <div class="tarjeta-servicio fade-in fade-in-d2">
-        <span class="tarjeta-numero">02</span>
         <img src="img/iconos/latoneria.png" alt="Icono de latonería" class="icono-servicio">
         <h3>Latonería</h3>
         <p>Reparaciones de carrocería, restauración de paneles y abolladuras.</p>
@@ -86,7 +86,6 @@
 
       <div class="tarjeta-servicio fade-in fade-in-d3 no-disponible">
         <span class="badge-no-disponible">No disponible</span>
-        <span class="tarjeta-numero">03</span>
         <img src="img/iconos/polichada.png" alt="Icono de polichada" class="icono-servicio">
         <h3>Polichada</h3>
         <p>Pulido profesional para eliminar imperfecciones y lograr brillo espejo.</p>
@@ -94,7 +93,6 @@
 
       <div class="tarjeta-servicio fade-in fade-in-d4 no-disponible">
         <span class="badge-no-disponible">No disponible</span>
-        <span class="tarjeta-numero">04</span>
         <img src="img/iconos/ceramica.png" alt="Icono de recubrimiento cerámico" class="icono-servicio">
         <h3>Cerámica</h3>
         <p>Revestimiento cerámico premium para protección duradera contra arañazos y contaminantes.</p>
@@ -149,25 +147,25 @@
     <div class="grid-proceso">
       <div class="paso fade-in fade-in-d1">
         <div class="paso-numero">1</div>
-        <h4>Diagnóstico</h4>
+        <h3>Diagnóstico</h3>
         <p>Evaluamos el estado real de tu vehículo y te cotizamos sin compromiso.</p>
       </div>
 
       <div class="paso fade-in fade-in-d2">
         <div class="paso-numero">2</div>
-        <h4>Reparación</h4>
+        <h3>Reparación</h3>
         <p>Ejecutamos el trabajo con precisión, usando materiales de primera calidad.</p>
       </div>
 
       <div class="paso fade-in fade-in-d3">
         <div class="paso-numero">3</div>
-        <h4>Control de Calidad</h4>
+        <h3>Control de Calidad</h3>
         <p>Revisamos cada detalle para asegurarnos de que el resultado sea perfecto.</p>
       </div>
 
       <div class="paso fade-in fade-in-d4">
         <div class="paso-numero">4</div>
-        <h4>Entrega</h4>
+        <h3>Entrega</h3>
         <p>Te devolvemos tu auto impecable, con la satisfacción de un trabajo bien hecho.</p>
       </div>
     </div>
@@ -205,33 +203,56 @@
 
     <div class="grid-testimonios">
       <div class="testimonio fade-in fade-in-d1">
-        <p class="testimonio-texto">"Dejaron mi carro impecable. La pintura quedó como nueva, parece que acabara de salir del concesionario."</p>
+        <p class="testimonio-texto">"Traje un Mazda 3 con la pintura quemada por el sol. Lo devolvieron con un brillo húmedo que no esperaba. Ya van tres conocidos que les pedí el número."</p>
         <p class="testimonio-autor">— Carlos M.</p>
       </div>
 
       <div class="testimonio fade-in fade-in-d2">
-        <p class="testimonio-texto">"Excelente servicio y atención. Me explicaron todo el proceso y cumplieron con el tiempo prometido."</p>
+        <p class="testimonio-texto">"Chocaron mi camioneta y pensé que ese color ya no se conseguía. Lograron igualar el tono exacto y la reparación quedó invisible. Cumplieron en cuatro días."</p>
         <p class="testimonio-autor">— Andrea L.</p>
       </div>
 
       <div class="testimonio fade-in fade-in-d3">
-        <p class="testimonio-texto">"La polichada que le hicieron a mi auto es increíble. Quedó con un brillo espejo que dura hasta hoy."</p>
+        <p class="testimonio-texto">"Hice el paquete completo: latonería, pintura, polichada y cerámica. El resultado fue mejor de lo que imaginaba. Mi BMW parece recién salido del concesionario."</p>
         <p class="testimonio-autor">— Felipe R.</p>
       </div>
     </div>
   </section>
 
-  <script src="js/script.js"></script>
+  <section class="comentarios">
+    <p class="subtitulo-seccion fade-in">Tu Opinión</p>
+    <h2 class="titulo-seccion fade-in">Deja tu Comentario</h2>
+
+    <div class="divisor-dorado fade-in">
+      <span class="linea"></span>
+      <span class="rombo"></span>
+      <span class="linea"></span>
+    </div>
+
+    <form class="formulario-comentario fade-in" id="form-comentario">
+      <div class="form-campos">
+        <input type="text" id="input-nombre" placeholder="Tu nombre" required maxlength="80">
+        <input type="text" id="input-auto" placeholder="Tu auto (ej: BMW Serie 3)" maxlength="80">
+      </div>
+      <textarea id="input-comentario" placeholder="Cuéntanos tu experiencia..." required maxlength="500" rows="4"></textarea>
+      <button type="submit" class="btn btn-primario">Publicar Comentario</button>
+      <p class="form-mensaje" id="form-mensaje"></p>
+    </form>
+
+    <div class="lista-comentarios" id="lista-comentarios"></div>
+  </section>
+
+  </main>
 
   <footer>
     <div class="footer-grid">
       <div class="footer-col footer-brand">
         <img src="img/logo.png" alt="Luxury Cars" class="footer-logo-img">
-        <p class="footer-desc">Taller automotriz especializado en pintura, latonería y acabados de lujo. Calidad que se ve y se siente.</p>
+        <p class="footer-desc">Taller automotriz con diez años restaurando vehículos en Bogotá. Pintura, latonería, polichada y cerámica. Cada trabajo tiene garantía escrita.</p>
       </div>
 
       <div class="footer-col footer-nav">
-        <h4>Navegación</h4>
+        <h3>Navegación</h3>
         <ul>
           <li><a href="index.html">Inicio</a></li>
           <li><a href="servicios.html">Servicios</a></li>
@@ -241,7 +262,7 @@
       </div>
 
       <div class="footer-col footer-horario">
-        <h4>Horarios</h4>
+        <h3>Horarios</h3>
         <p>Lun — Vie: 8:00 AM — 6:00 PM</p>
         <p>Sáb: 8:00 AM — 2:00 PM</p>
         <p class="footer-horario-domingo">Dom: Cerrado</p>
@@ -259,5 +280,6 @@
   </footer>
 
   <script src="js/script.js"></script>
+  <script src="js/comentarios.js"></script>
 </body>
 </html>

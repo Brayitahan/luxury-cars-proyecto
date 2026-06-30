@@ -1,0 +1,37 @@
+[
+  {
+    "id": "ejemplo-1",
+    "nombre": "Andrés Mejía",
+    "comentario": "Traje un Mazda 3 con la pintura quemada por el sol. Lo devolvieron con un brillo húmedo que no esperaba. Ya van tres conocidos que les pedí el número.",
+    "auto": "Mazda 3",
+    "fecha": "2026-06-25T14:30:00.000Z"
+  },
+  {
+    "id": "ejemplo-2",
+    "nombre": "Carolina Ramírez",
+    "comentario": "Chocaron mi camioneta y pensé que ese color ya no se conseguía. Lograron igualar el tono exacto y la reparación quedó invisible. Cumplieron en cuatro días.",
+    "auto": "Toyota Hilux",
+    "fecha": "2026-06-20T10:15:00.000Z"
+  },
+  {
+    "id": "ejemplo-3",
+    "nombre": "Felipe Rojas",
+    "comentario": "Hice el paquete completo: latonería, pintura, polichada y cerámica. El resultado fue mejor de lo que imaginaba. Mi BMW parece recién salido del concesionario.",
+    "auto": "BMW 320i",
+    "fecha": "2026-06-15T09:00:00.000Z"
+  },
+  {
+    "id": "ejemplo-4",
+    "nombre": "Laura Vargas",
+    "comentario": "Solo iba a cotizar un golpe y terminé dejando el carro completo. La confianza que me dio el diagnóstico fue lo que me convenció. Quedó perfecto.",
+    "auto": "Mazda CX-5",
+    "fecha": "2026-06-10T16:45:00.000Z"
+  },
+  {
+    "id": "ejemplo-5",
+    "nombre": "Diego Torres",
+    "comentario": "La polichada que le hicieron a mi Audi quedó con un brillo espejo que dura hasta hoy. La atención personalizada marca la diferencia.",
+    "auto": "Audi A4",
+    "fecha": "2026-06-05T11:30:00.000Z"
+  }
+]
