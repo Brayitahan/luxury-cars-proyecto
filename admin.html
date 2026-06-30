@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Luxury Cars</title>
+<link rel="icon" type="image/png" sizes="48x48" href="img/favicon.png">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com https://picsum.photos; connect-src 'self';">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="img/logo.png" alt="Luxury Cars" class="logo-img">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="inventario.html">Inventario</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="admin.html" class="nav-admin activo" title="Panel de administración" aria-current="page">&#9881;</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+  <!-- GATE: pantalla de ingreso -->
+  <section class="admin-gate" id="admin-gate">
+    <div class="admin-gate-contenido">
+      <p class="subtitulo-seccion">Administración</p>
+      <h1 class="titulo-seccion">Acceso Restringido</h1>
+      <div class="divisor-dorado">
+        <span class="linea"></span>
+        <span class="rombo"></span>
+        <span class="linea"></span>
+      </div>
+      <form class="admin-gate-form" id="form-gate">
+        <input type="password" id="input-admin-token" placeholder="Código de administrador" required>
+        <button type="submit" class="btn btn-primario">Ingresar</button>
+        <p class="form-mensaje" id="gate-mensaje"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- PANEL: contenido protegido -->
+  <section class="admin-panel" id="admin-panel" style="display:none;">
+
+    <section class="subir-trabajo">
+      <p class="subtitulo-seccion fade-in">Panel</p>
+      <h1 class="titulo-seccion fade-in">Agregar Trabajo</h1>
+      <div class="divisor-dorado fade-in">
+        <span class="linea"></span>
+        <span class="rombo"></span>
+        <span class="linea"></span>
+      </div>
+
+      <form class="formulario-trabajo fade-in" id="form-trabajo" enctype="multipart/form-data">
+        <div class="form-fila">
+          <input type="text" name="titulo" placeholder="Título (ej: BMW Serie 3)" required maxlength="100">
+          <select name="servicio" required>
+            <option value="">Tipo de servicio</option>
+            <option value="Pintura completa">Pintura completa</option>
+            <option value="Latonería y pintura">Latonería y pintura</option>
+            <option value="Pulido y detallado">Pulido y detallado</option>
+            <option value="Pintura personalizada">Pintura personalizada</option>
+            <option value="Restauración de faros y pulido">Restauración de faros y pulido</option>
+            <option value="Latonería completa">Latonería completa</option>
+            <option value="Cerámica">Cerámica</option>
+          </select>
+        </div>
+        <textarea name="descripcion" placeholder="Descripción del trabajo realizado..." required maxlength="300" rows="3"></textarea>
+        <div class="form-foto">
+          <label>Antes <input type="file" name="before" accept=".jpg,.jpeg,.png,.webp" required></label>
+          <label>Después <input type="file" name="after" accept=".jpg,.jpeg,.png,.webp" required></label>
+          <label class="label-opcional">Proceso (opcional, varias fotos) <input type="file" name="proceso" accept=".jpg,.jpeg,.png,.webp" multiple></label>
+        </div>
+        <button type="submit" class="btn btn-primario">Subir Trabajo</button>
+        <p class="form-mensaje" id="form-mensaje-trabajo"></p>
+      </form>
+
+      <!-- Modal editar -->
+      <div class="modal-overlay" id="modal-editar" style="display:none;">
+        <div class="modal-contenido">
+          <p class="subtitulo-seccion">Editar Trabajo</p>
+          <button class="modal-cerrar" id="modal-cerrar">&times;</button>
+          <form class="formulario-trabajo" id="form-editar" enctype="multipart/form-data">
+            <input type="hidden" id="edit-id">
+            <div class="form-fila">
+              <input type="text" id="edit-titulo" placeholder="Título" required maxlength="100">
+              <select id="edit-servicio" required>
+                <option value="">Tipo de servicio</option>
+                <option value="Pintura completa">Pintura completa</option>
+                <option value="Latonería y pintura">Latonería y pintura</option>
+                <option value="Pulido y detallado">Pulido y detallado</option>
+                <option value="Pintura personalizada">Pintura personalizada</option>
+                <option value="Restauración de faros y pulido">Restauración de faros y pulido</option>
+                <option value="Latonería completa">Latonería completa</option>
+                <option value="Cerámica">Cerámica</option>
+              </select>
+            </div>
+            <textarea id="edit-descripcion" placeholder="Descripción" required maxlength="300" rows="3"></textarea>
+            <div class="form-foto">
+              <label>Antes (dejar vacío para mantener actual) <input type="file" name="before" accept=".jpg,.jpeg,.png,.webp"></label>
+              <label>Después (dejar vacío para mantener actual) <input type="file" name="after" accept=".jpg,.jpeg,.png,.webp"></label>
+              <label class="label-opcional">Proceso (opcional, reemplaza todas las fotos actuales) <input type="file" name="proceso" accept=".jpg,.jpeg,.png,.webp" multiple></label>
+            </div>
+            <button type="submit" class="btn btn-primario">Guardar Cambios</button>
+            <p class="form-mensaje" id="form-mensaje-editar"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="inventario">
+      <p class="subtitulo-seccion fade-in">Galería</p>
+      <h2 class="titulo-seccion fade-in">Trabajos Subidos</h2>
+      <div class="divisor-dorado fade-in">
+        <span class="linea"></span>
+        <span class="rombo"></span>
+        <span class="linea"></span>
+      </div>
+      <div class="grid-trabajos" id="lista-trabajos"></div>
+    </section>
+
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <img src="img/logo.png" alt="Luxury Cars" class="footer-logo-img">
+        <p class="footer-desc">Taller automotriz con diez años restaurando vehículos en Bogotá. Pintura, latonería, polichada y cerámica. Cada trabajo tiene garantía escrita.</p>
+      </div>
+      <div class="footer-col footer-nav">
+        <h3>Navegación</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="inventario.html">Inventario</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-horario">
+        <h3>Horarios</h3>
+        <p>Lun — Vie: 8:00 AM — 6:00 PM</p>
+        <p>Sáb: 8:00 AM — 2:00 PM</p>
+        <p class="footer-horario-domingo">Dom: Cerrado</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-divisor">
+        <span class="linea"></span>
+        <span class="rombo"></span>
+        <span class="linea"></span>
+      </div>
+      <p>&copy; 2026 Luxury Cars. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -8,6 +8,20 @@
         "CONTEXT7_API_KEY": "ctx7sk-b3df757f-ac91-459f-99db-e2ba131aac89"
       },
       "enabled": true
+    },
+    "notebooklm": {
+      "type": "local",
+      "command": [
+        "C:\\Users\\yaira daniela\\AppData\\Roaming\\Python\\Python314\\Scripts\\notebooklm-mcp.exe"
+      ],
+      "enabled": true
+    },
+    "touchpoint": {
+      "type": "local",
+      "command": [
+        "C:\\Users\\yaira daniela\\AppData\\Roaming\\Python\\Python314\\Scripts\\touchpoint-mcp.exe"
+      ],
+      "enabled": true
     }
   }
 }

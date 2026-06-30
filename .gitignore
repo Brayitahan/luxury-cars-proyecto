@@ -8,3 +8,9 @@ Thumbs.db
 
 # opencode global config (project-specific is tracked)
 ~/.config/opencode/
+
+# Environment variables (contains secrets)
+.env
+
+# Dependencies
+node_modules/

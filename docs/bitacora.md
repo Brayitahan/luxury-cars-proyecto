@@ -176,23 +176,42 @@ Backup pusheado a GitHub antes de los cambios.
 
 ---
 
+---
+
+## Sesión 15 — SEO, `<main>`, heading hierarchy y aria
+
+- `<h1>` único agregado a servicios, inventario, contacto y admin
+- `<main>` semántico envuelve el contenido principal en las 5 páginas
+- `aria-current="page"` en el nav activo de todas las páginas
+- Footer `<h4>` migrado a `<h3>` en todas las páginas (jerarquía correcta h1→h2→h3)
+- Hero de servicios: título `<h2>`→`<h1>`; sección "Cómo Trabajamos" `<h4>`→`<h3>`
+- Hero de inventario y contacto: `<h2>`→`<h1>`
+- Admin gate y panel: `<h2>`→`<h1>` (mutuamente excluyentes)
+
+**Commits:** (pendiente)
+
+---
+
 ## Estado actual del proyecto
 
 ### Páginas
 | Ruta | Estado |
 |---|---|
-| `index.html` | ✅ Completo — carrusel hero + servicios rápidos + números + CTA |
-| `servicios.html` | ✅ Completo — hero tipográfico, tarjetas con textura, elegirnos, proceso, ubicación, testimonios |
-| `inventario.html` | ✅ Completo — hero grid 2×2, galería antes/después con 6 trabajos |
-| `contacto.html` | ✅ Completo — hero split, WhatsApp y correo |
+| `index.html` | ✅ Completo — carrusel hero + mapa + números + CTA + h1 + main + aria-current |
+| `servicios.html` | ✅ Completo — hero tipográfico, tarjetas con textura, proceso, ubicación, testimonios, h1, main, aria-current |
+| `inventario.html` | ✅ Completo — hero parallax grid, galería dinámica + lightbox + h1 + main + aria-current |
+| `contacto.html` | ✅ Completo — hero split, WhatsApp y correo + h1 + main + aria-current |
+| `admin.html` | ✅ Panel protegido con JWT, CRUD inventario + h1 + main + aria-current |
 
 ### Archivos clave
-- `css/estilos.css` — ~1720 líneas, tema oscuro con props CSS personalizadas
+- `css/estilos.css` — tema oscuro con props CSS personalizadas (`--color-dorado`)
 - `js/script.js` — carrusel, IntersectionObserver, addEventListener
+- `js/inventario.js` — galería dinámica con lightbox y parallax
+- `js/admin.js` — login JWT, CRUD trabajos, edición/deleción
+- `server.js` — API REST Express (puerto 3000), multer, JWT, rate-limit, helmet, file-type
 - `docs/bitacora.md` — este documento
 
 ### Pendientes
 - Dirección en Ubicación es placeholder — el usuario debe actualizarla
-- Testimonios son placeholder — editables en HTML
-- Imágenes en `img/` son placeholders según `img/README.txt`
+- Imágenes en `img/` son placeholders
 - No hay herramientas de test/lint/formato configuradas

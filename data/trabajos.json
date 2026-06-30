@@ -1,0 +1,35 @@
+[
+  {
+    "id": "seed-bmw",
+    "titulo": "BMW Serie 3",
+    "servicio": "Pintura completa",
+    "descripcion": "Restauración completa de pintura con acabado de alto brillo y capa de protección cerámica.",
+    "before": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&h=400&fit=crop",
+    "after": "https://images.unsplash.com/photo-1556189250-72ba2ba823b0?w=600&h=400&fit=crop",
+    "fecha": "2026-06-15T00:00:00Z"
+  },
+  {
+    "id": "seed-mustang",
+    "titulo": "Ford Mustang GT",
+    "servicio": "Pintura completa",
+    "descripcion": "Cambio de color completo a rojo brillante con capa de protección cerámica de 5 años.",
+    "before": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=400&fit=crop",
+    "after": "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?w=600&h=400&fit=crop",
+    "fecha": "2026-06-20T00:00:00Z"
+  },
+  {
+    "id": "seed-porsche-proceso",
+    "titulo": "Porsche 911 Carrera",
+    "servicio": "Pintura personalizada",
+    "descripcion": "Transformación completa con pintura personalizada azul metalizado. El proceso incluyó lijado, imprimación, capas de color y barniz de alto brillo.",
+    "before": "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&h=400&fit=crop",
+    "after": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=400&fit=crop",
+    "proceso": [
+      "https://images.unsplash.com/photo-1619642913040-3c1e6f7d6a8f?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1619642913100-8f5b7e4b7b4a?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85f82f?w=600&h=400&fit=crop"
+    ],
+    "fecha": "2026-07-01T00:00:00Z"
+  }
+]

@@ -8,12 +8,20 @@
 |---|---|
 | `index.html` | ✅ Inicio — carrusel hero (5 diapositivas, avance automático 5s) |
 | `servicios.html` | ✅ Servicios — 4 tarjetas escritas a mano |
-| `inventario.html` | ✅ Galería antes/después con 6 trabajos |
+| `inventario.html` | ✅ Galería antes/después con 6 trabajos (carga dinámica desde API) |
+| `admin.html` | ✅ Panel protegido con código para subir trabajos nuevos |
 | `contacto.html` | ✅ Hero split con WhatsApp y correo |
 
 ## Archivos clave
 - `css/estilos.css` — todos los estilos, tema oscuro con propiedades CSS personalizadas (`--color-dorado`, etc.), clases kebab-case
 - `js/script.js` — lógica del carrusel + IntersectionObserver + addEventListener
+- `js/comentarios.js` — lógica de comentarios (fetch GET/POST, crear tarjetas con textContent)
+- `js/inventario.js` — lógica del inventario (fetch GET, crear tarjetas con textContent)
+- `js/admin.js` — panel admin con autenticación por token y subida de imágenes
+- `server.js` — API REST con Express (puerto 3000), almacena en `data/comentarios.json` y `data/trabajos.json`, subida de imágenes con multer a `img/inventario/`
+- `server.js` — API REST con Express (puerto 3000), almacena en `data/comentarios.json` y `data/trabajos.json`, subida de imágenes con multer a `img/inventario/`
+- `data/comentarios.json` — almacenamiento persistente de comentarios como array JSON
+- `data/trabajos.json` — almacenamiento persistente de trabajos del inventario como array JSON
 
 ## Convenciones
 - Idioma: español (nombres de clases, comentarios, contenido)
@@ -30,7 +38,7 @@
 │   ├── logo.png
 │   ├── hero/          ← carrusel (5 diapositivas)
 │   ├── iconos/        ← servicios, ubicación, whatsapp
-│   ├── inventario/    ← antes/después (pendiente fotos reales)
+│   ├── inventario/    ← antes/después (subidas por el formulario)
 │   └── servicios/     ← hero de servicios (pendiente)
 ├── docs/
 │   ├── bitacora.md
@@ -43,6 +51,11 @@
 ├── servicios.html
 ├── inventario.html
 ├── contacto.html
+├── server.js
+├── package.json
+├── data/
+│   ├── comentarios.json
+│   └── trabajos.json
 ├── opencode.json
 ├── AGENTS.md
 └── skills-lock.json
