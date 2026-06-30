@@ -188,6 +188,20 @@ Backup pusheado a GitHub antes de los cambios.
 - Hero de inventario y contacto: `<h2>`→`<h1>`
 - Admin gate y panel: `<h2>`→`<h1>` (mutuamente excluyentes)
 
+**Commits:** `c31a4a0`
+
+---
+
+## Sesión 16 — Migración a PostgreSQL + Railway
+
+- Migrada persistencia de JSON files a PostgreSQL (`db.js`)
+- Creado `db.js`: pool de conexiones, inicialización de tablas (`trabajos`, `comentarios`), seed data
+- `server.js` actualizado: rutas usan `db.query()` en lugar de `leerJSON`/`guardarJSON`
+- Agregado `pg` a dependencias
+- Conectado a Railway proyecto `innovative-charm`
+- Agregado PostgreSQL al proyecto Railway
+- Seed data: 3 trabajos (BMW, Mustang, Porsche) y 5 comentarios desde PostgreSQL
+
 **Commits:** (pendiente)
 
 ---

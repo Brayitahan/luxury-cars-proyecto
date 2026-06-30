@@ -9,14 +9,13 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
 const { fileTypeFromFile } = require("file-type");
+const db = require("./db");
 
 const app = express();
 const PUERTO = process.env.PORT || 3000;
 const ADMIN_CODE = process.env.ADMIN_CODE || "Mono14723";
 const JWT_SECRET = process.env.JWT_SECRET || uuidv4();
 const JWT_EXPIRA = "24h";
-const DIR_COMENTARIOS = path.join(__dirname, "data", "comentarios.json");
-const DIR_TRABAJOS = path.join(__dirname, "data", "trabajos.json");
 const DIR_SUBIDAS = path.join(__dirname, "img", "inventario");
 
 if (!fs.existsSync(DIR_SUBIDAS)) {
@@ -58,19 +57,6 @@ const loginLimiter = rateLimit({
   max: 5,
   message: { error: "Demasiados intentos. Espera un minuto." },
 });
-
-function leerJSON(ruta) {
-  try {
-    const raw = fs.readFileSync(ruta, "utf-8");
-    return JSON.parse(raw);
-  } catch {
-    return [];
-  }
-}
-
-function guardarJSON(ruta, lista) {
-  fs.writeFileSync(ruta, JSON.stringify(lista, null, 2), "utf-8");
-}
 
 function sanitizar(texto) {
   return texto.replace(/<[^>]*>/g, "").trim();
@@ -124,40 +110,53 @@ app.post("/api/admin/login", loginLimiter, (req, res) => {
 
 /* ---- COMENTARIOS ---- */
 
-app.get("/api/comentarios", (_req, res) => {
-  res.json(leerJSON(DIR_COMENTARIOS));
+app.get("/api/comentarios", function (_req, res) {
+  db.query("SELECT * FROM comentarios ORDER BY fecha DESC").then(function (result) {
+    res.json(result.rows);
+  }).catch(function (err) {
+    res.status(500).json({ error: err.message });
+  });
 });
 
-app.post("/api/comentarios", (req, res) => {
+app.post("/api/comentarios", function (req, res) {
   const { nombre, comentario, auto } = req.body;
 
   if (!nombre || !comentario) {
     return res.status(400).json({ error: "El nombre y el comentario son obligatorios." });
   }
 
-  const nuevo = {
-    id: uuidv4(),
-    nombre: sanitizar(nombre).slice(0, 80),
-    comentario: sanitizar(comentario).slice(0, 500),
-    auto: sanitizar(auto || "").slice(0, 80),
-    fecha: new Date().toISOString(),
-  };
+  var n = sanitizar(nombre).slice(0, 80);
+  var c = sanitizar(comentario).slice(0, 500);
+  var a = sanitizar(auto || "").slice(0, 80);
 
-  if (!nuevo.nombre || !nuevo.comentario) {
+  if (!n || !c) {
     return res.status(400).json({ error: "El nombre y el comentario no pueden estar vacíos." });
   }
 
-  const lista = leerJSON(DIR_COMENTARIOS);
-  lista.unshift(nuevo);
-  guardarJSON(DIR_COMENTARIOS, lista);
+  var id = uuidv4();
+  var fecha = new Date().toISOString();
 
-  res.status(201).json(nuevo);
+  db.query(
+    "INSERT INTO comentarios (id, nombre, comentario, auto, fecha) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+    [id, n, c, a, fecha]
+  ).then(function (result) {
+    res.status(201).json(result.rows[0]);
+  }).catch(function (err) {
+    res.status(500).json({ error: err.message });
+  });
 });
 
 /* ---- INVENTARIO ---- */
 
-app.get("/api/trabajos", (_req, res) => {
-  res.json(leerJSON(DIR_TRABAJOS));
+app.get("/api/trabajos", function (_req, res) {
+  db.query("SELECT * FROM trabajos ORDER BY fecha DESC").then(function (result) {
+    res.json(result.rows.map(function (t) {
+      t.proceso = t.proceso || [];
+      return t;
+    }));
+  }).catch(function (err) {
+    res.status(500).json({ error: err.message });
+  });
 });
 
 function requiereAdmin(req, res, next) {
@@ -206,22 +205,20 @@ app.post("/api/trabajos", requiereAdmin, upload.fields([
       });
     }
 
-    const nuevo = {
-      id: uuidv4(),
-      titulo: sanitizar(titulo).slice(0, 100),
-      servicio: sanitizar(servicio).slice(0, 60),
-      descripcion: sanitizar(descripcion).slice(0, 300),
-      before: "img/inventario/" + req.files.before[0].filename,
-      after: "img/inventario/" + req.files.after[0].filename,
-      proceso: proceso,
-      fecha: new Date().toISOString(),
-    };
+    var id = uuidv4();
+    var t = sanitizar(titulo).slice(0, 100);
+    var s = sanitizar(servicio).slice(0, 60);
+    var d = sanitizar(descripcion).slice(0, 300);
+    var before = "img/inventario/" + req.files.before[0].filename;
+    var after = "img/inventario/" + req.files.after[0].filename;
+    var fecha = new Date().toISOString();
 
-    const lista = leerJSON(DIR_TRABAJOS);
-    lista.unshift(nuevo);
-    guardarJSON(DIR_TRABAJOS, lista);
-
-    res.status(201).json(nuevo);
+    return db.query(
+      "INSERT INTO trabajos (id, titulo, servicio, descripcion, before, after, proceso, fecha) VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8) RETURNING *",
+      [id, t, s, d, before, after, JSON.stringify(proceso), fecha]
+    );
+  }).then(function (result) {
+    res.status(201).json(result.rows[0]);
   }).catch(function (err) {
     limpiarArchivos(req.files);
     res.status(400).json({ error: err.message });
@@ -233,76 +230,91 @@ app.put("/api/trabajos/:id", requiereAdmin, upload.fields([
   { name: "after", maxCount: 1 },
   { name: "proceso", maxCount: 10 },
 ]), function (req, res) {
-  const lista = leerJSON(DIR_TRABAJOS);
-  var idx = lista.findIndex(function (t) { return t.id === req.params.id; });
-
-  if (idx === -1) {
-    limpiarArchivos(req.files);
-    return res.status(404).json({ error: "Trabajo no encontrado." });
-  }
-
-  var existente = lista[idx];
-
-  if (req.body.titulo) existente.titulo = sanitizar(req.body.titulo).slice(0, 100);
-  if (req.body.servicio) existente.servicio = sanitizar(req.body.servicio).slice(0, 60);
-  if (req.body.descripcion) existente.descripcion = sanitizar(req.body.descripcion).slice(0, 300);
-
-  var promesas = [];
-
-  if (req.files) {
-    if (req.files.before) promesas.push(validarImagen(req.files.before[0].path));
-    if (req.files.after) promesas.push(validarImagen(req.files.after[0].path));
-    if (req.files.proceso) {
-      req.files.proceso.forEach(function (f) { promesas.push(validarImagen(f.path)); });
+  db.query("SELECT * FROM trabajos WHERE id = $1", [req.params.id]).then(function (result) {
+    if (result.rows.length === 0) {
+      limpiarArchivos(req.files);
+      throw { status: 404, message: "Trabajo no encontrado." };
     }
-  }
 
-  Promise.all(promesas).then(function () {
+    var existente = result.rows[0];
+    var titulo = req.body.titulo ? sanitizar(req.body.titulo).slice(0, 100) : existente.titulo;
+    var servicio = req.body.servicio ? sanitizar(req.body.servicio).slice(0, 60) : existente.servicio;
+    var descripcion = req.body.descripcion ? sanitizar(req.body.descripcion).slice(0, 300) : existente.descripcion;
+    var before = existente.before;
+    var after = existente.after;
+    var proceso = existente.proceso || [];
+
+    var promesas = [];
+
     if (req.files) {
-      if (req.files.before) {
-        eliminarArchivo(existente.before);
-        existente.before = "img/inventario/" + req.files.before[0].filename;
-      }
-      if (req.files.after) {
-        eliminarArchivo(existente.after);
-        existente.after = "img/inventario/" + req.files.after[0].filename;
-      }
+      if (req.files.before) promesas.push(validarImagen(req.files.before[0].path));
+      if (req.files.after) promesas.push(validarImagen(req.files.after[0].path));
       if (req.files.proceso) {
-        (existente.proceso || []).forEach(eliminarArchivo);
-        existente.proceso = req.files.proceso.map(function (f) {
-          return "img/inventario/" + f.filename;
-        });
+        req.files.proceso.forEach(function (f) { promesas.push(validarImagen(f.path)); });
       }
     }
 
-    lista[idx] = existente;
-    guardarJSON(DIR_TRABAJOS, lista);
-    res.json(existente);
+    return Promise.all(promesas).then(function () {
+      if (req.files) {
+        if (req.files.before) {
+          eliminarArchivo(existente.before);
+          before = "img/inventario/" + req.files.before[0].filename;
+        }
+        if (req.files.after) {
+          eliminarArchivo(existente.after);
+          after = "img/inventario/" + req.files.after[0].filename;
+        }
+        if (req.files.proceso) {
+          (existente.proceso || []).forEach(eliminarArchivo);
+          proceso = req.files.proceso.map(function (f) {
+            return "img/inventario/" + f.filename;
+          });
+        }
+      }
+
+      return db.query(
+        "UPDATE trabajos SET titulo = $1, servicio = $2, descripcion = $3, before = $4, after = $5, proceso = $6::jsonb WHERE id = $7 RETURNING *",
+        [titulo, servicio, descripcion, before, after, JSON.stringify(proceso), req.params.id]
+      );
+    });
+  }).then(function (result) {
+    res.json(result.rows[0]);
   }).catch(function (err) {
+    if (err.status) {
+      return res.status(err.status).json({ error: err.message });
+    }
     limpiarArchivos(req.files);
     res.status(400).json({ error: err.message });
   });
 });
 
 app.delete("/api/trabajos/:id", requiereAdmin, function (req, res) {
-  const lista = leerJSON(DIR_TRABAJOS);
-  var idx = lista.findIndex(function (t) { return t.id === req.params.id; });
+  db.query("SELECT * FROM trabajos WHERE id = $1", [req.params.id]).then(function (result) {
+    if (result.rows.length === 0) {
+      throw { status: 404, message: "Trabajo no encontrado." };
+    }
 
-  if (idx === -1) {
-    return res.status(404).json({ error: "Trabajo no encontrado." });
-  }
+    var trabajo = result.rows[0];
+    eliminarArchivo(trabajo.before);
+    eliminarArchivo(trabajo.after);
+    (trabajo.proceso || []).forEach(eliminarArchivo);
 
-  var trabajo = lista[idx];
-  eliminarArchivo(trabajo.before);
-  eliminarArchivo(trabajo.after);
-  (trabajo.proceso || []).forEach(eliminarArchivo);
-
-  lista.splice(idx, 1);
-  guardarJSON(DIR_TRABAJOS, lista);
-
-  res.json({ mensaje: "Trabajo eliminado." });
+    return db.query("DELETE FROM trabajos WHERE id = $1", [req.params.id]);
+  }).then(function () {
+    res.json({ mensaje: "Trabajo eliminado." });
+  }).catch(function (err) {
+    if (err.status) {
+      return res.status(err.status).json({ error: err.message });
+    }
+    res.status(500).json({ error: err.message });
+  });
 });
 
-app.listen(PUERTO, () => {
-  console.log("Servidor corriendo en http://localhost:" + PUERTO);
+db.iniciar().then(function () {
+  app.listen(PUERTO, () => {
+    console.log("Servidor corriendo en http://localhost:" + PUERTO);
+  });
+}).catch(function (err) {
+  console.error("Error al conectar con la base de datos:", err);
+  process.exit(1);
 });
