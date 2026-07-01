@@ -1,68 +1,92 @@
 # Luxury Cars — AGENTS.md
 
 ## Stack
-- Sitio estático puro (HTML + CSS + JS vanilla). Sin build, sin package.json, sin servidor. Abre los `.html` directamente en el navegador.
+- Frontend: HTML + CSS + JS vanilla (ES5/ES6). Sin framework.
+- Backend: Node.js + Express + PostgreSQL (Railway).
+- Despliegue: Railway (`https://web-production-c048f.up.railway.app`).
 
 ## Páginas
 | Ruta | Estado |
 |---|---|
-| `index.html` | ✅ Inicio — carrusel hero (5 diapositivas, avance automático 5s) |
-| `servicios.html` | ✅ Servicios — 4 tarjetas escritas a mano |
-| `inventario.html` | ✅ Galería antes/después con 6 trabajos (carga dinámica desde API) |
-| `admin.html` | ✅ Panel protegido con código para subir trabajos nuevos |
-| `contacto.html` | ✅ Hero split con WhatsApp y correo |
+| `index.html` | ✅ Inicio — carrusel hero (5 diapositivas, 5s) + mapa Google + números + CTA |
+| `servicios.html` | ✅ Servicios — hero tipográfico, 4 tarjetas con textura diamante, proceso 4 pasos |
+| `inventario.html` | ✅ Galería dinámica desde API + lightbox con before/after/proceso + parallax hero |
+| `contacto.html` | ✅ Hero split 50/50 + WhatsApp + correo |
+| `admin.html` | ✅ Panel protegido con JWT + CRUD (crear/editar/eliminar trabajos) + subida de imágenes |
 
 ## Archivos clave
-- `css/estilos.css` — todos los estilos, tema oscuro con propiedades CSS personalizadas (`--color-dorado`, etc.), clases kebab-case
-- `js/script.js` — lógica del carrusel + IntersectionObserver + addEventListener
-- `js/comentarios.js` — lógica de comentarios (fetch GET/POST, crear tarjetas con textContent)
-- `js/inventario.js` — lógica del inventario (fetch GET, crear tarjetas con textContent)
-- `js/admin.js` — panel admin con autenticación por token y subida de imágenes
-- `server.js` — API REST con Express (puerto 3000), almacena en `data/comentarios.json` y `data/trabajos.json`, subida de imágenes con multer a `img/inventario/`
-- `server.js` — API REST con Express (puerto 3000), almacena en `data/comentarios.json` y `data/trabajos.json`, subida de imágenes con multer a `img/inventario/`
-- `data/comentarios.json` — almacenamiento persistente de comentarios como array JSON
-- `data/trabajos.json` — almacenamiento persistente de trabajos del inventario como array JSON
+- `css/estilos.css` — tema oscuro con props CSS (`--color-dorado`), clases kebab-case, animaciones, lightbox, responsive
+- `js/script.js` — carrusel hero + IntersectionObserver (fade-in) global
+- `js/inventario.js` — galería dinámica (fetch GET), lightbox, parallax grid
+- `js/comentarios.js` — carga y envío de comentarios (fetch GET/POST)
+- `js/admin.js` — login JWT, CRUD trabajos, modal de edición
+- `server.js` — Express, helmet, rate-limit, JWT, multer, file-type validation
+- `db.js` — pool PostgreSQL, creación de tablas, seed data
+- `railway.json` — configuración de deploy Railway
+
+## API (Express, puerto 3000)
+| Ruta | Método | Auth | Descripción |
+|---|---|---|---|
+| `/api/admin/login` | POST | rate-limit | Login con código, devuelve JWT (24h) |
+| `/api/trabajos` | GET | — | Lista todos los trabajos |
+| `/api/trabajos` | POST | JWT | Crear trabajo (multipart: before + after + proceso opcional) |
+| `/api/trabajos/:id` | PUT | JWT | Editar trabajo (texto + reemplazo opcional de imágenes) |
+| `/api/trabajos/:id` | DELETE | JWT | Eliminar trabajo + archivos del disco |
+| `/api/comentarios` | GET | — | Lista comentarios |
+| `/api/comentarios` | POST | — | Crear comentario |
+
+## Base de datos (PostgreSQL en Railway)
+- Tabla `trabajos`: id, titulo, servicio, descripcion, before, after, proceso (JSONB), fecha
+- Tabla `comentarios`: id, nombre, comentario, auto, fecha
+- Seed: 3 trabajos (BMW Serie 3, Ford Mustang GT, Porsche 911 Carrera) + 5 comentarios
 
 ## Convenciones
-- Idioma: español (nombres de clases, comentarios, contenido)
-- Clases CSS: kebab-case
+- Idioma: español (nombres, clases, contenido)
+- Clases CSS: kebab-case (ej. `tarjeta-servicio`)
 - JS: ES5/ES6, sin framework
+- Comentarios en español, explicando el "por qué"
 
-## Estructura del proyecto
+## Estructura
 ```
 /
 ├── css/estilos.css
-├── js/script.js
+├── js/script.js, inventario.js, admin.js, comentarios.js
 ├── img/
-│   ├── favicon.png
-│   ├── logo.png
-│   ├── hero/          ← carrusel (5 diapositivas)
-│   ├── iconos/        ← servicios, ubicación, whatsapp
-│   ├── inventario/    ← antes/después (subidas por el formulario)
-│   └── servicios/     ← hero de servicios (pendiente)
+│   ├── hero/          ← 5 diapositivas (placeholders taller-1.jpg..5.jpg)
+│   ├── iconos/        ← servicios, whatsapp
+│   └── inventario/    ← imágenes subidas por admin
 ├── docs/
 │   ├── bitacora.md
 │   └── security_best_practices_report.md
-├── .opencode/commands/
-│   ├── bitacora.md
-│   ├── description.md
-│   └── fotos.md
-├── index.html
-├── servicios.html
-├── inventario.html
-├── contacto.html
+├── data/              ← backups JSON (ya no se usan en producción)
 ├── server.js
+├── db.js
 ├── package.json
-├── data/
-│   ├── comentarios.json
-│   └── trabajos.json
+├── railway.json
 ├── opencode.json
 ├── AGENTS.md
-└── skills-lock.json
+├── .env               ← ADMIN_CODE, JWT_SECRET (no commit)
+└── .gitignore
 ```
 
+## Variables de entorno (`.env`)
+| Variable | Descripción |
+|---|---|
+| `ADMIN_CODE` | Código de acceso al panel admin (default: `Mono14723`) |
+| `JWT_SECRET` | Secreto para firmar JWTs (default: auto-generado) |
+| `DATABASE_URL` | Cadena de conexión PostgreSQL (solo en Railway) |
+
 ## Gotchas
-- No hay herramientas de test/lint/formato configuradas
-- Las imágenes en `img/hero/` son placeholders (taller-1.jpg a taller-5.jpg)
-- El inventario usa URLs de Unsplash hasta que el usuario tome fotos reales
-- `img/inventario/` e `img/servicios/` están vacíos (con `.gitkeep`) esperando fotos reales
+- Railway despliega desde la rama `master` del repo.
+- Railway usa Node.js v18. `file-type@16` para compatibilidad CommonJS.
+- Imágenes subidas se guardan en `img/inventario/` con nombre UUID.
+- Las imágenes seed (Unsplash) no están en disco; el DELETE las ignora silenciosamente.
+- No hay herramientas de test/lint configuradas.
+- `img/hero/` placeholders — reemplazar con fotos reales del taller.
+- `img/servicios/` vacío (con `.gitkeep`).
+
+## Deploy
+```bash
+git checkout master && git merge develop && git push origin master
+```
+Railway auto-despliega desde master. URL: `https://web-production-c048f.up.railway.app`
