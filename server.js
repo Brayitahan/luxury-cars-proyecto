@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
-const { fileTypeFromFile } = require("file-type");
+const { fromFile: fileTypeFromFile } = require("file-type");
 const db = require("./db");
 
 const app = express();
