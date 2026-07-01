@@ -14,6 +14,7 @@
       "command": [
         "C:\\Users\\yaira daniela\\AppData\\Roaming\\Python\\Python314\\Scripts\\notebooklm-mcp.exe"
       ],
+      "timeout": 60000,
       "enabled": true
     },
     "touchpoint": {
@@ -21,6 +22,7 @@
       "command": [
         "C:\\Users\\yaira daniela\\AppData\\Roaming\\Python\\Python314\\Scripts\\touchpoint-mcp.exe"
       ],
+      "timeout": 60000,
       "enabled": true
     }
   }
