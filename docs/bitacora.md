@@ -202,7 +202,7 @@ Backup pusheado a GitHub antes de los cambios.
 - Agregado PostgreSQL al proyecto Railway
 - Seed data: 3 trabajos (BMW, Mustang, Porsche) y 5 comentarios desde PostgreSQL
 
-**Commits:** (pendiente)
+**Commits:** `2bbd64a`, `8e2a5a4`
 
 ---
 
